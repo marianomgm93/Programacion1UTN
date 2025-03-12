@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1741658197 source:/home/mariano/practica C/Funciones/main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
