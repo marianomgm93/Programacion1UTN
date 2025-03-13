@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1741809982 source:/home/mariano/practica C/FuncionesPilas/pila.c
+	"pila.h"
+
+1741809982 /home/mariano/practica C/FuncionesPilas/pila.h
+	<stdio.h>
+	<malloc.h>
+
+1741827209 source:/home/mariano/practica C/FuncionesPilas/main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+
