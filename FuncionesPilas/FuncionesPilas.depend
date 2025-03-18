@@ -6,8 +6,9 @@
 	<stdio.h>
 	<malloc.h>
 
-1741828187 source:/home/mariano/practica C/FuncionesPilas/main.c
+1742316190 source:/home/mariano/practica C/FuncionesPilas/main.c
 	<stdio.h>
 	<stdlib.h>
 	"pila.h"
+	<math.h>
 

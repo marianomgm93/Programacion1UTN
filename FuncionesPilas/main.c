@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "pila.h"
 #define IN 1
 #define OUT 0
@@ -18,7 +19,8 @@ void menu(Pila* pila1, Pila* pila2)
     while(status)
     {
         printf("0\tSalir\n1\tIngresar elementos\n2\tPasar elementos\n3\tPasar elementos Ordenado\n4\t"
-               "Sacar menor\n5\tOrdenar pila\n6\tInsertar ordenado\n7\tPasar pila ordenada\n8\tSumar primeros\n10\tCalcular promedio"
+               "Sacar menor\n5\tOrdenar pila\n6\tInsertar ordenado\n7\tPasar pila ordenada\n8\tSumar primeros\n"
+               "10\tCalcular promedio\n11\tConversion Lineal"
                "\n9\tMostrar pilas\n");
         scanf("%i",&option);
         switch(option)
@@ -154,6 +156,23 @@ void menu(Pila* pila1, Pila* pila2)
                 break;
             case 2:
                 calcularPromedio(pila2);
+                break;
+            default:
+                printf("La opcion ingresada no es valida\n");
+                break;
+            }
+            break;
+        case 11:
+            printf("1\tConversion lineal pila 1\n2\tConversion lineal pila 2\n");
+            scanf("%i",&option);
+            switch(option)
+            {
+            case 1:
+                convertirLineal(pila1);
+
+                break;
+            case 2:
+                convertirLineal(pila2);
                 break;
             default:
                 printf("La opcion ingresada no es valida\n");
@@ -383,7 +402,6 @@ int contarTodos(Pila* pila)
         apilar(&pilaAux,desapilar(pila));
     }
     pasarElementos(&pilaAux,pila);
-    printf("Elementos contados con exito");
     return contador;
 }
 float division(int dividendo,int divisor)
@@ -394,4 +412,29 @@ float division(int dividendo,int divisor)
 void calcularPromedio(Pila* pila)
 {
     printf("El promedio de la pila es de : %.2f\n",division(sumarTodos(pila),contarTodos(pila)));
+}
+/**
+*10. Hacer una función que reciba una pila con números de un solo dígito
+(es responsabilidad de quien usa el programa) y que transforme esos dígitos en un número decimal.
+*/
+
+void convertirLineal(Pila* pila)
+{
+    int num=0,cantidad=contarTodos(pila);
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    for (int i=cantidad-1;i>=0;i--)
+    {
+        num+=tope(pila)* potencia(10,i);
+        apilar(&pilaAux,desapilar(pila));
+    }
+    pasarElementos(&pilaAux,pila);
+    printf("El numero resultante es: %i\n",num);
+}
+int potencia(int base,int exponente){
+    int resultado=1;
+    for(int i=1;i<=exponente;i++){
+        resultado*=base;
+    }
+    return resultado;
 }
