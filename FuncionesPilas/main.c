@@ -185,10 +185,10 @@ void menu(Pila* pila1, Pila* pila2)
             switch(option)
             {
             case 1:
-                mostrar(pila1);
+                mostrarPila(pila1);
                 break;
             case 2:
-                mostrar(pila2);
+                mostrarPila(pila2);
                 break;
             default:
                 printf("La opcion ingresada no es valida\n");
@@ -219,7 +219,7 @@ void ingresarElemento(Pila* pila)
             printf("Ingrese el numero a agregar\n");
             scanf("%i",&num);
             apilar(pila,num);
-            mostrar(pila);
+            mostrarPila(pila);
             break;
         }
     }
@@ -437,4 +437,18 @@ int potencia(int base,int exponente){
         resultado*=base;
     }
     return resultado;
+}
+/**
+*Realizar una función que muestre la pila sin utilizar la función mostrar.
+*/
+void mostrarPila(Pila* pila){
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    printf("\n\nBase-->");
+    pasarElementos(pila,&pilaAux);
+    while(!pilavacia(&pilaAux)){
+        printf("| %i ",tope(&pilaAux));
+        apilar(pila,desapilar(&pilaAux));
+    }
+    printf("|<--Tope\n\n");
 }
