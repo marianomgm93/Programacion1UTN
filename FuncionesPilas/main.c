@@ -17,7 +17,9 @@ void menu(Pila* pila1, Pila* pila2)
     int option;
     while(status)
     {
-        printf("0\tSalir\n1\tIngresar elementos\n2\tPasar elementos\n3\tPasar elementos Ordenado\n4\tSacar menor\n5\tOrdenar pila\n9\tMostrar pilas\n");
+        printf("0\tSalir\n1\tIngresar elementos\n2\tPasar elementos\n3\tPasar elementos Ordenado\n4\t"
+               "Sacar menor\n5\tOrdenar pila\n6\tInsertar ordenado\n7\tPasar pila ordenada\n8\tSumar primeros\n10\tCalcular promedio"
+               "\n9\tMostrar pilas\n");
         scanf("%i",&option);
         switch(option)
         {
@@ -86,6 +88,72 @@ void menu(Pila* pila1, Pila* pila2)
                 break;
             case 2:
                 ordenarPila(pila2,pila1);
+                break;
+            default:
+                printf("La opcion ingresada no es valida\n");
+                break;
+            }
+            break;
+        case 6:
+            printf("1\tInsertar en pila 1\n2\tInsertar en pila 2\n");
+            scanf("%i",&option);
+            switch(option)
+            {
+            case 1:
+                insertarOrdenado(pila1);
+                break;
+            case 2:
+                insertarOrdenado(pila2);
+                break;
+            default:
+                printf("La opcion ingresada no es valida\n");
+                break;
+            }
+            break;
+        case 7:
+            printf("1\tDestino pila 2\n2\tDestino pila 1\n");
+            scanf("%i",&option);
+            switch(option)
+            {
+            case 1:
+                generarPilaOrdenada(pila1,pila2);
+                break;
+            case 2:
+                generarPilaOrdenada(pila2,pila1);
+                break;
+            default:
+                printf("La opcion ingresada no es valida\n");
+                break;
+            }
+            break;
+        case 8:
+            printf("1\tsumar de pila 1\n2\tSumar de pila 2\n");
+            scanf("%i",&option);
+            switch(option)
+            {
+            case 1:
+                printf("%i\n",sumarPrimeros(pila1));
+
+                break;
+            case 2:
+                printf("%i\n",sumarPrimeros(pila2));
+                break;
+            default:
+                printf("La opcion ingresada no es valida\n");
+                break;
+            }
+            break;
+        case 10:
+            printf("1\tPromediar pila 1\n2\tPromediar pila 2\n");
+            scanf("%i",&option);
+            switch(option)
+            {
+            case 1:
+                calcularPromedio(pila1);
+
+                break;
+            case 2:
+                calcularPromedio(pila2);
                 break;
             default:
                 printf("La opcion ingresada no es valida\n");
@@ -197,4 +265,133 @@ void ordenarPila(Pila* pilaOrigen, Pila* pilaDestino)
         menor=sacarMenor(pilaOrigen);
         apilar(pilaDestino,menor);
     }
+}
+/**
+6. Hacer una función que inserta en una pila ordenada un nuevo elemento, conservando el orden de ésta.
+*/
+void insertarOrdenado(Pila* pila)
+{
+    int num,status=IN;
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    printf("Ingrese el numero a insertar en la pila");
+    scanf("%i",&num);
+    while(!pilavacia(pila) && status)
+    {
+        if(tope(pila)<num)
+        {
+            apilar(pila,num);
+            status=OUT;
+        }
+        else
+        {
+            apilar(&pilaAux, desapilar(pila));
+        }
+    }
+    if(status)
+    {
+        apilar(pila,num);
+    }
+    while(!pilavacia(&pilaAux))
+    {
+        apilar(pila,desapilar(&pilaAux));
+    }
+    printf("El numero ha sido insertado exitosamente\n");
+}
+void insertarOrdenadoSinMenu(Pila* pila,int num)
+{
+    int status=IN;
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    while(!pilavacia(pila) && status)
+    {
+        if(tope(pila)<num)
+        {
+            apilar(pila,num);
+            status=OUT;
+        }
+        else
+        {
+            apilar(&pilaAux, desapilar(pila));
+        }
+    }
+    if(status)
+    {
+        apilar(pila,num);
+    }
+    while(!pilavacia(&pilaAux))
+    {
+        apilar(pila,desapilar(&pilaAux));
+    }
+}
+/**
+7. Hacer una función que pase los elementos de una pila a otra,
+de manera que se genere una nueva pila ordenada. Usar la función del ejercicio 6.  (Ordenamiento por inserción)
+*/
+void generarPilaOrdenada(Pila* pilaOrigen, Pila* pilaDestino)
+{
+    while(!pilavacia(pilaOrigen))
+    {
+        insertarOrdenadoSinMenu(pilaDestino,desapilar(pilaOrigen));
+    }
+    printf("Proceso finalizado\n");
+}
+/**
+*8. Hacer una función que sume los dos primeros elementos de una pila (tope y anterior), y retorne la suma,
+*   sin alterar el contenido de la pila.
+*/
+int sumarPrimeros(Pila* pila)
+{
+    int suma,num;
+    num=desapilar(pila);
+    suma=tope(pila)+num;
+    apilar(pila,num);
+    return suma;
+}
+
+/**
+*9. Hacer una función que calcule el promedio de los elementos de una pila,
+*para ello hacer también una función que calcule la suma, otra para la cuenta y otra que divida.
+*En total son cuatro funciones, y la función que calcula el promedio invoca a las otras 3.
+*/
+
+int sumarTodos(Pila* pila)
+{
+    int suma=0;
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    while(!pilavacia(pila))
+    {
+        suma+=tope(pila);
+        apilar(&pilaAux,desapilar(pila));
+    }
+    while(!pilavacia(&pilaAux))
+    {
+        apilar(pila,desapilar(&pilaAux));
+    }
+    printf("Suma finalizada");
+    return suma;
+}
+int contarTodos(Pila* pila)
+{
+    int contador=0;
+    Pila pilaAux;
+    inicpila(&pilaAux);
+    while(!pilavacia(pila))
+    {
+        contador++;
+        apilar(&pilaAux,desapilar(pila));
+    }
+    pasarElementos(&pilaAux,pila);
+    printf("Elementos contados con exito");
+    return contador;
+}
+float division(int dividendo,int divisor)
+{
+    float razon=(float) dividendo/divisor;
+    return razon;
+}
+void calcularPromedio(Pila* pila)
+{
+    printf("El promedio de la pila es de : %.2f\n",division(sumarTodos(pila),contarTodos(pila)));
 }
