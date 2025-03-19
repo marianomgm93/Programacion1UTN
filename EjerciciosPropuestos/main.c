@@ -6,6 +6,8 @@ float calcularPrecio(int cantidad,float precio);
 void compra(int* cantidad,float* precio);
 void calcularDescuento(float* montoTotal,int cantidadProducto,float* totalConDescuento);
 void facturar(int cantidad,float precio,float total,float totalConDescuento);
+void vender(int* cantidad,float* precio,float* total,float* totalConDescuento,int* sumatoriaVendidos,float* totalDiario);
+void iniciarVendedor(int* cantidad,float* precio,float* total,float* totalConDescuento,int* sumatoriaVendidos,float* totalDiario);
 int negocio();
 int main()
 {
@@ -18,7 +20,7 @@ int negocio()
     float precio,total,totalConDescuento,totalDiario;
     while(status)
     {
-        printf("0\tSalir\n1\tCompra\n2\tPrecio carrito\n3\tFacturar\n");
+        printf("0\tSalir\n1\tCompra\n2\tPrecio carrito\n3\tFacturar\n4\tRealizar venta\n5\tArqueo diario\n6\tIniciar vendedor\n");
         scanf("%i",&option);
         switch(option)
         {
@@ -30,6 +32,9 @@ int negocio()
             case 1:
                 status=OUT;
             case 2:
+                break;
+            default:
+                printf("El caracter ingresado no corresponde a ninguna opcion, intentelo nuevamente");
                 break;
             }
             break;
@@ -45,9 +50,18 @@ int negocio()
             facturar(cantidad,precio,total,totalConDescuento);
             break;
         case 4:
+            vender(&cantidad,&precio,&total,&totalConDescuento,&sumatoriaVendidos,&totalDiario);
+            break;
+        case 5:
+            printf("Total diario actual:%.2f\nVentas totales:%i\n",totalDiario,sumatoriaVendidos);
+            break;
+        case 6:
+            iniciarVendedor(&cantidad,&precio,&total,&totalConDescuento,&sumatoriaVendidos,&totalDiario);
+            break;
+        default:
+            printf("El caracter ingresado no corresponde a ninguna opcion, intentelo nuevamente");
             break;
         }
-
     }
 }
 /**A_Hacer una función que pida la cantidad de productos comprados por el cliente y el
@@ -99,14 +113,50 @@ void calcularDescuento(float* montoTotal,int cantidadProducto,float* totalConDes
 void facturar(int cantidad,float precio,float total,float totalConDescuento)
 {
 
-    printf("Empresa \"nombreEmpresa\"\nCantidad de productos\t%i u\nPrecio por producto\t$%.2f\nTotal parcial\t$%.2f\nDescuento aplicado\t-$%.2f\nTotal a pagar\t$%.2f\n",cantidad,precio,total,total-totalConDescuento,totalConDescuento);
+    printf("Empresa \"nombreEmpresa\"\n"
+           "Cantidad de productos.....%i u\n"
+           "Precio por producto.......$%.2f\n"
+           "Total parcial.............$%.2f\n"
+           "Descuento aplicado........-$%.2f\n"
+           "Total a pagar.............$%.2f\n",cantidad,precio,total,total-totalConDescuento,totalConDescuento);
 }
 /**
 *E_Una función que realice una venta (tiene que llamar a todas las anteriores
 */
-void vender()
+void vender(int* cantidad,float* precio,float* total,float* totalConDescuento,int* sumatoriaVendidos,float* totalDiario)
 {
-    compra()
+    compra(cantidad,precio);
+    *total=calcularPrecio(*cantidad,*precio);
+    calcularDescuento(total,*cantidad,totalConDescuento);
+    facturar(*cantidad,*precio,*total,*totalConDescuento);
+    *totalDiario+=*totalConDescuento;
+    *sumatoriaVendidos+=*cantidad;
+}
+/**
+*F_El usuario puede realizar todas las ventas que desee, una vez que ya no tiene más ventas, el programa
+*debe mostrar el monto total y la cantidad de producto vendido a lo largo del día.
+*/
+void iniciarVendedor(int* cantidad,float* precio,float* total,float* totalConDescuento,int* sumatoriaVendidos,float* totalDiario)
+{
+    int status=IN,option;
+    while(status)
+    {
+        printf("1\tNueva venta\n0\tSalir\n");
+        scanf("%i",&option);
+        switch(option)
+        {
+        case 0:
+            status=OUT;
+            break;
+        case 1:
+            vender(cantidad,precio,total,totalConDescuento,sumatoriaVendidos,totalDiario);
+            break;
+        default:
+            printf("El caracter ingresado no corresponde a ninguna opcion, intentelo nuevamente");
+            break;
+        }
+
+    }
 }
 /**Ejercicios propuestos
 
