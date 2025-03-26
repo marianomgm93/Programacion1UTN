@@ -1,5 +1,6 @@
 #include "pila.h"
-
+#include <stdio.h>
+#include <stdlib.h>
 
 void inicpila(P_Pila p)
 {

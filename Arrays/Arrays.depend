@@ -11,3 +11,17 @@
 	<stdlib.h>
 	"pila.h"
 
+1743000573 source:d:\marianogonzalez\arrays\pila.c
+	"pila.h"
+	<stdio.h>
+	<stdlib.h>
+
+1742995551 d:\marianogonzalez\arrays\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1743007244 source:d:\marianogonzalez\arrays\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+
