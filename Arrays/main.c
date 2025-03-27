@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <conio.h>
 #include "pila.h"
 #define IN 1
 #define OUT 0
@@ -23,6 +24,10 @@ void insertarCaracterOrdenadoMenu(char arreglo[],int* validos);
 char maximoCaracter(char arreglo[],int validos);
 int esCapicua(int arreglo[],int validos);
 void invertirArreglo(int arreglo[],int validos);
+void ordenamientoPorSeleccion(int arreglo[],int validos);
+int posicionMenor(int posicionInicial,int arreglo[],int validos);
+void ordenamientoPorInsercion(int arreglo[],int validos);
+void insertarNum(int arreglo[],int posicion,int posicionMenor);
 int main()
 {
     int arregloInt[DIMENSION];
@@ -38,15 +43,16 @@ int main()
 }
 void menu(int arreglo[],int* validos,Pila* pila,float arregloFloat[], int* validosFloat,char arregloChar[],int* validosChar)
 {
-
     int option, status=IN;
     while(status)
     {
+        system("cls");
         printf("0\tSalir\n1\tMenu Enteros\n2\tMenu Float\n3\tMenu char\n");
         scanf("%i",&option);
         switch(option)
         {
         case 0:
+            system("cls");
             printf("Saliendoo!");
             status=OUT;
             break;
@@ -71,22 +77,26 @@ void menuInt(int arreglo[],int* validos,Pila* pila)
     while(status)
     {
         printf("0\tAtras\n1\tCargar Arreglo\n2\tSumar arreglo\n3\tArreglo a pila\n4\tMostrar arreglo\n5\tEs capicua?\n"
-               "6\tInvertir arreglo\n");
+               "6\tInvertir arreglo\n7\tOrdenamiento por seleccion\n");
         scanf("%i",&option);
         switch(option)
         {
         case 0:
+            system("cls");
             printf("Saliendoo!\n");
             status=OUT;
             break;
         case 1:
+            system("cls");
             cargarArray(arreglo,validos);
             showArray(arreglo,*validos);
             break;
         case 2:
+            system("cls");
             printf("La suma del arreglo es: %i\n",sumarArray(arreglo,*validos));
             break;
         case 3:
+            system("cls");
             arrayToPila(arreglo,*validos,pila);
             mostrar(pila);
             break;
@@ -94,10 +104,22 @@ void menuInt(int arreglo[],int* validos,Pila* pila)
             showArray(arreglo,*validos);
             break;
         case 5:
+            system("cls");
             esCapicua(arreglo,*validos);
             break;
         case 6:
+            system("cls");
             invertirArreglo(arreglo,*validos);
+            break;
+        case 7:
+            system("cls");
+            ordenamientoPorSeleccion(arreglo,*validos);
+            showArray(arreglo,*validos);
+            break;
+        case 8:
+            system("cls");
+            ordenamientoPorInsercion(arreglo,*validos);
+            showArray(arreglo,*validos);
             break;
         }
     }
@@ -121,6 +143,7 @@ void cargarArray(int arreglo[],int* validos)
             break;
 
         case 1:
+            system("cls");
             printf("Cuantos numeros desea agregar?\n");
             scanf("%i",&cantidad);
             if((cantidad+*validos)<=DIMENSION)
@@ -143,6 +166,7 @@ void addNum(int cantidad,int arreglo[],int* validos)
 
     for(int i=0; i<cantidad; i++)
     {
+        system("cls");
         printf("Ingrese el numero a agregar en el lugar %i:\n",*validos+i);
         scanf("%i",&num);
         arreglo[*validos+i]=num;
@@ -164,6 +188,7 @@ void inicArray(int arreglo[])
 */
 void showArray(int arreglo[],int validos)
 {
+    system("cls");
     printf("Array:\n");
     for(int i =0; i<validos; i++)
     {
@@ -216,6 +241,7 @@ void menuFloat(float arreglo[],int* validos)
     int option,status=IN;
     while(status)
     {
+        system("cls");
         printf("0\tAtras\n1\tCargar Arreglo Float\n2\tMostrar arreglo Float\n");
         scanf("%i",&option);
         switch(option)
@@ -224,9 +250,11 @@ void menuFloat(float arreglo[],int* validos)
             status=OUT;
             break;
         case 1:
+            system("cls");
             cargarArrayFloat(arreglo,validos);
             break;
         case 2:
+            system("cls");
             showArrayFloat(arreglo,*validos);
             break;
         }
@@ -309,6 +337,7 @@ void menuChar(char arreglo[],int* validos)
     int option, status=IN;
     while(status)
     {
+        system("cls");
         printf("0\tAtras\n1\tCargar String\n2\tMostrar string\n3\tBuscar elemento\n4\t"
                "Insertar caracter ordenado\n5\tObtener maximo\n");
         scanf("%i",&option);
@@ -343,6 +372,7 @@ void cargarArrayChar(char arreglo[],int* validos)
     int option,cantidad,status=IN;
     while(status)
     {
+        system("cls");
         printf("1\tCargar cadena(max 100c)\n0\tAtras\n");
         scanf("%i",&option);
         switch(option)
@@ -382,6 +412,7 @@ void buscarElementoMenu(char arreglo[],int validos)
     char letra;
     while(status)
     {
+        system("cls");
         printf("1\tBuscar un caracter\n0\tAtras\n");
         scanf("%i",&option);
         switch(option)
@@ -428,6 +459,7 @@ int buscarElemento(char arreglo[],char letra,int validos)
 */
 void insertarCaracterOrdenadoMenu(char arreglo[],int* validos)
 {
+    system("cls");
     char letra;
     printf("ingrese el caracter que desea insertar\n");
     fflush(stdin);
@@ -494,9 +526,11 @@ int esCapicua(int arreglo[],int validos)
 /**
 *10. Realizar una función que invierta los elementos de un arreglo. (sin utilizar un arreglo auxiliar)
 */
-void invertirArreglo(int arreglo[],int validos){
+void invertirArreglo(int arreglo[],int validos)
+{
     int num;
-    for(int i=0;i<validos/2;i++){
+    for(int i=0; i<validos/2; i++)
+    {
         num=arreglo[validos-1-i];
         arreglo[validos-1-i]=arreglo[i];
         arreglo[i]=num;
@@ -507,17 +541,50 @@ void invertirArreglo(int arreglo[],int validos){
 *a. Selección
 *b. Inserción
 */
-void ordenamientoPorSeleccion(int arreglo[],int validos){
-    int min=arreglo[0];
-    for(int i=0;i<validos-1;i++){
+void ordenamientoPorSeleccion(int arreglo[],int validos)
+{
+    int aux,posicionAux;
 
+    for(int i=0; i<validos-1; i++)
+    {
+        posicionAux=posicionMenor(i,arreglo,validos);
+        aux=arreglo[i];
+        arreglo[i]=arreglo[posicionAux];
+        arreglo[posicionAux]=aux;
     }
 
 }
-int posicionMenor(int posicionInicial,int arreglo[],int validos){
-    int posicionDelMenor,menor=arreglo[posicionInicial];
-        for(int i=posicionInicial;i<validos;i++){
-
+int posicionMenor(int posicionInicial,int arreglo[],int validos)
+{
+    int posicionDelMenor=posicionInicial,menor=arreglo[posicionInicial];
+    for(int i=posicionInicial+1; i<validos; i++)
+    {
+        if(arreglo[i]<menor)
+        {
+            posicionDelMenor=i;
+            menor=arreglo[i];
         }
+    }
+    return posicionDelMenor;
+}
+void ordenamientoPorInsercion(int arreglo[],int validos)
+{
+    int aux,posicionAux,i;
+
+    for(i=0; i<validos-1; i++)
+    {
+        insertarNum(arreglo,i,posicionMenor(i,arreglo,validos));
+    }
+
+}
+void insertarNum(int arreglo[],int posicion,int posicionMenor)
+{
+    int aux=arreglo[posicion],aux2;
+    arreglo[posicion]=arreglo[posicionMenor];
+    for(int i=posicion;i<=posicionMenor;i++){
+        aux2=arreglo[i+1];
+        arreglo[i+1]=aux;
+        aux=aux2;
+    }
 
 }

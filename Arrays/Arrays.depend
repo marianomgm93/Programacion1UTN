@@ -25,3 +25,18 @@
 	<stdlib.h>
 	"pila.h"
 
+1743019991 source:c:\repositoriomariano\arrays\pila.c
+	"pila.h"
+	<stdio.h>
+	<stdlib.h>
+
+1743019991 c:\repositoriomariano\arrays\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1743037871 source:c:\repositoriomariano\arrays\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"pila.h"
+
