@@ -78,7 +78,7 @@ void menuInt(int arreglo[],int* validos,Pila* pila)
     while(status)
     {
         printf("0\tAtras\n1\tCargar Arreglo\n2\tSumar arreglo\n3\tArreglo a pila\n4\tMostrar arreglo\n5\tEs capicua?\n"
-               "6\tInvertir arreglo\n7\tOrdenamiento por seleccion\n");
+               "6\tInvertir arreglo\n7\tOrdenamiento por seleccion\n8\tOrdenamiento por insercion\n");
         scanf("%i",&option);
         switch(option)
         {
@@ -575,22 +575,29 @@ void ordenamientoPorInsercion(int arreglo[],int validos)
     for(i=1; i<validos; i++)
     {
         insertarNum(arreglo,i);
+        showArray(arreglo,validos);
     }
 
 }
 void insertarNum(int arreglo[],int posicion)
 {
-    int aux=arreglo[posicion],j=posicion-1;
-    while(j>=0){
+    int aux=arreglo[posicion],j=posicion-1,status=IN;
+    while(status==IN){
         if(comparar(aux,arreglo[j])){
             arreglo[j+1]=aux;
+            status=OUT;
+
+        }else if(j==0){
+            arreglo[j+1]=arreglo[j];
+            arreglo[j]=aux;
+            status=OUT;
         }else{
             arreglo[j+1]=arreglo[j];
         }
-        arreglo[j+1]=aux;
         j--;
 
     }
+
 
 
 }
@@ -599,7 +606,7 @@ void insertarNum(int arreglo[],int posicion)
 
 */
 int comparar(int num1,int num2){
-    if (num2<num1){
+    if (num1>=num2){
         return 1;
     }else{
         return 0;
