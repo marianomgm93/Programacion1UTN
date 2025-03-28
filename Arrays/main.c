@@ -27,7 +27,8 @@ void invertirArreglo(int arreglo[],int validos);
 void ordenamientoPorSeleccion(int arreglo[],int validos);
 int posicionMenor(int posicionInicial,int arreglo[],int validos);
 void ordenamientoPorInsercion(int arreglo[],int validos);
-void insertarNum(int arreglo[],int posicion,int posicionMenor);
+void insertarNum(int arreglo[],int posicionMenor);
+int comparar(int num1,int num2);
 int main()
 {
     int arregloInt[DIMENSION];
@@ -571,20 +572,36 @@ void ordenamientoPorInsercion(int arreglo[],int validos)
 {
     int aux,posicionAux,i;
 
-    for(i=0; i<validos-1; i++)
+    for(i=1; i<validos; i++)
     {
-        insertarNum(arreglo,i,posicionMenor(i,arreglo,validos));
+        insertarNum(arreglo,i);
     }
 
 }
-void insertarNum(int arreglo[],int posicion,int posicionMenor)
+void insertarNum(int arreglo[],int posicion)
 {
-    int aux=arreglo[posicion],aux2;
-    arreglo[posicion]=arreglo[posicionMenor];
-    for(int i=posicion;i<=posicionMenor;i++){
-        aux2=arreglo[i+1];
-        arreglo[i+1]=aux;
-        aux=aux2;
+    int aux=arreglo[posicion],j=posicion-1;
+    while(j>=0){
+        if(comparar(aux,arreglo[j])){
+            arreglo[j+1]=aux;
+        }else{
+            arreglo[j+1]=arreglo[j];
+        }
+        arreglo[j+1]=aux;
+        j--;
+
     }
 
+
+}
+/**
+*Devuelve 1 y 0 segun sea mas grande el primer o segundo numero
+
+*/
+int comparar(int num1,int num2){
+    if (num2<num1){
+        return 1;
+    }else{
+        return 0;
+    }
 }
