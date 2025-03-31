@@ -1,14 +1,17 @@
 # depslib dependency file v1.0
-1741809982 source:/home/mariano/practica C/Arrays/pila.c
+1743201780 source:/home/mariano/practica C/Arrays/pila.c
 	"pila.h"
+	<stdio.h>
+	<stdlib.h>
 
-1741809982 /home/mariano/practica C/Arrays/pila.h
+1743201780 /home/mariano/practica C/Arrays/pila.h
 	<stdio.h>
 	<malloc.h>
 
-1742949040 source:/home/mariano/practica C/Arrays/main.c
+1743201780 source:/home/mariano/practica C/Arrays/main.c
 	<stdio.h>
 	<stdlib.h>
+	<conio.h>
 	"pila.h"
 
 1743000573 source:d:\marianogonzalez\arrays\pila.c

@@ -612,3 +612,34 @@ int comparar(int num1,int num2){
         return 0;
     }
 }
+/**
+*12.​Dados dos arreglos ordenados alfabéticamente, crear un tercer
+*arreglo con los elementos de
+*los dos primeros intercalados, de manera que quede un arreglo también ordenado
+*alfabéticamente.
+*/
+char fusionarArregloChar(char arreglo1[],int validos1,char arreglo2,int validos2[]){
+    int validosFusion=validos1+validos2,i=0,posicionArreglo1,posicionArreglo2;
+    char arregloFusion[validosFusion];
+    for (int i=0;i<validosFusion;i++){
+
+
+    }
+
+    }
+
+}
+/**
+*Retorna 1 si char1 es menor o igual que char2
+*/
+int compararChar(char caracter1,char caracter2){
+    if(caracter1<=caracter2){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+void insertarChar(char arreglo,char caracter,int posicion){
+    arreglo[posicion]=caracter;
+}
+
