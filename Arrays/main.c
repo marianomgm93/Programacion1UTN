@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
+//#include <conio.h>
 #include "pila.h"
 #define IN 1
 #define OUT 0
@@ -10,6 +10,7 @@ void addNum(int cantidad,int arreglo[],int* validos);
 void addNumFloat(int cantidad,float arreglo[],int* validos);
 void showArray(int arreglo[],int validos);
 void showArrayFloat(float arreglo[],int validos);
+void showArrayChar(char arreglo[],int validos);
 void inicArray(int arreglo[]);
 void inicArrayFloat(float arreglo[]);
 void menu(int arreglo[],int* validos,Pila* pila,float arregloFloat[], int* validosFloat,char arregloChar[],int* validosChar);
@@ -28,18 +29,26 @@ void ordenamientoPorSeleccion(int arreglo[],int validos);
 int posicionMenor(int posicionInicial,int arreglo[],int validos);
 void ordenamientoPorInsercion(int arreglo[],int validos);
 void insertarNum(int arreglo[],int posicionMenor);
+void fusionarArregloChar(char arregloFusion[],int* validosFusion,char arreglo1[],int validos1,char arreglo2[],int validos2);
 int comparar(int num1,int num2);
+int compararChar(char caracter1,char caracter2);
+void insertarChar(char arreglo[],char caracter,int posicion);
+char buscarSiguienteChar(char arreglo1[],char arreglo2[],int* posicionArreglo1,int* posicionArreglo2,int validos1,int validos2);
 int main()
 {
     int arregloInt[DIMENSION];
     float arregloFloat[DIMENSION];
-    char arregloChar[DIMENSION];
+    char arregloFinal[DIMENSION];
+    //char arregloChar2[DIMENSION];
+    //char arregloChar3[DIMENSION];
     Pila pila;
     inicpila(&pila);
     int validos=0;
     int validosFloat=0;
-    int validosChar=0;
-    menu(arregloInt, &validos,&pila,arregloFloat,&validosFloat,arregloChar,&validosChar);
+    int validosFinal=0;
+    int validosChar2=5;
+    int validosChar3=5;
+    menu(arregloInt, &validos,&pila,arregloFloat,&validosFloat,arregloFinal,&validosFinal);
     return 0;
 }
 void menu(int arreglo[],int* validos,Pila* pila,float arregloFloat[], int* validosFloat,char arregloChar[],int* validosChar)
@@ -75,10 +84,11 @@ void menu(int arreglo[],int* validos,Pila* pila,float arregloFloat[], int* valid
 void menuInt(int arreglo[],int* validos,Pila* pila)
 {
     int option,status=IN;
+    int arregloIndices[]= {1,6,12,19,27};
     while(status)
     {
         printf("0\tAtras\n1\tCargar Arreglo\n2\tSumar arreglo\n3\tArreglo a pila\n4\tMostrar arreglo\n5\tEs capicua?\n"
-               "6\tInvertir arreglo\n7\tOrdenamiento por seleccion\n8\tOrdenamiento por insercion\n");
+               "6\tInvertir arreglo\n7\tOrdenamiento por seleccion\n8\tOrdenamiento por insercion\n9\tSumar con indices\n");
         scanf("%i",&option);
         switch(option)
         {
@@ -121,6 +131,13 @@ void menuInt(int arreglo[],int* validos,Pila* pila)
             system("cls");
             ordenamientoPorInsercion(arreglo,*validos);
             showArray(arreglo,*validos);
+            break;
+        case 9:
+            system("cls");
+            int arregloSuma[*validos];
+            showArray(arregloIndices,5);
+            sumarPorIndice(arreglo,arregloIndices,arregloSuma,*validos);
+            showArray(arregloSuma,*validos);
             break;
         }
     }
@@ -335,12 +352,17 @@ void showArrayFloat(float arreglo[],int validos)
 
 void menuChar(char arreglo[],int* validos)
 {
+    char arregloChar2[]= {'a','b','f','t','z'};
+    char arregloChar3[]= {'c','d','e','x','y'};
+    int validosChar2=5;
+    int validosChar3=5;
     int option, status=IN;
     while(status)
     {
         system("cls");
+
         printf("0\tAtras\n1\tCargar String\n2\tMostrar string\n3\tBuscar elemento\n4\t"
-               "Insertar caracter ordenado\n5\tObtener maximo\n");
+               "Insertar caracter ordenado\n5\tObtener maximo\n6\tObtener arreglo fusion\n");
         scanf("%i",&option);
         switch(option)
         {
@@ -352,7 +374,7 @@ void menuChar(char arreglo[],int* validos)
             cargarArrayChar(arreglo,validos);
             break;
         case 2:
-            printf("String:\n%s\n",arreglo);
+            showArrayChar(arreglo,*validos);
             break;
         case 3:
             buscarElementoMenu(arreglo,*validos);
@@ -362,6 +384,9 @@ void menuChar(char arreglo[],int* validos)
             break;
         case 5:
             printf("El caracter mas grande del arreglo es: %c\n", maximoCaracter(arreglo,*validos));
+            break;
+        case 6:
+            fusionarArregloChar(arreglo,validos,arregloChar2,validosChar2,arregloChar3,validosChar3);
             break;
         }
 
@@ -436,6 +461,26 @@ void buscarElementoMenu(char arreglo[],int validos)
             }
 
             break;
+        }
+    }
+}
+void showArrayChar(char arreglo[],int validos)
+{
+    system("cls");
+    printf("Array:\n");
+    for(int i =0; i<validos; i++)
+    {
+        if(i==0)
+        {
+            printf("{%c,",arreglo[i]);
+        }
+        else if(i==validos-1)
+        {
+            printf(" %c}\n", arreglo[i]);
+        }
+        else
+        {
+            printf(" %c,", arreglo[i]);
         }
     }
 }
@@ -582,16 +627,22 @@ void ordenamientoPorInsercion(int arreglo[],int validos)
 void insertarNum(int arreglo[],int posicion)
 {
     int aux=arreglo[posicion],j=posicion-1,status=IN;
-    while(status==IN){
-        if(comparar(aux,arreglo[j])){
+    while(status==IN)
+    {
+        if(comparar(aux,arreglo[j]))
+        {
             arreglo[j+1]=aux;
             status=OUT;
 
-        }else if(j==0){
+        }
+        else if(j==0)
+        {
             arreglo[j+1]=arreglo[j];
             arreglo[j]=aux;
             status=OUT;
-        }else{
+        }
+        else
+        {
             arreglo[j+1]=arreglo[j];
         }
         j--;
@@ -605,10 +656,14 @@ void insertarNum(int arreglo[],int posicion)
 *Devuelve 1 y 0 segun sea mas grande el primer o segundo numero
 
 */
-int comparar(int num1,int num2){
-    if (num1>=num2){
+int comparar(int num1,int num2)
+{
+    if (num1>=num2)
+    {
         return 1;
-    }else{
+    }
+    else
+    {
         return 0;
     }
 }
@@ -618,28 +673,79 @@ int comparar(int num1,int num2){
 *los dos primeros intercalados, de manera que quede un arreglo también ordenado
 *alfabéticamente.
 */
-char fusionarArregloChar(char arreglo1[],int validos1,char arreglo2,int validos2[]){
-    int validosFusion=validos1+validos2,i=0,posicionArreglo1,posicionArreglo2;
-    char arregloFusion[validosFusion];
-    for (int i=0;i<validosFusion;i++){
+void fusionarArregloChar(char arregloFusion[],int* validosFusion,char arreglo1[],int validos1,char arreglo2[],int validos2)
+{
 
-
-    }
-
+    int posicionArreglo1=0,posicionArreglo2=0;
+    *validosFusion=validos1+validos2;
+    for (int i=0; i<*validosFusion; i++)
+    {
+        insertarChar(arregloFusion,buscarSiguienteChar(arreglo1,arreglo2,&posicionArreglo1,&posicionArreglo2,validos1,validos2),i);
     }
 
 }
 /**
 *Retorna 1 si char1 es menor o igual que char2
 */
-int compararChar(char caracter1,char caracter2){
-    if(caracter1<=caracter2){
+int compararChar(char caracter1,char caracter2)
+{
+    if(caracter1<=caracter2)
+    {
         return 1;
-    }else{
+    }
+    else
+    {
         return 0;
     }
 }
-void insertarChar(char arreglo,char caracter,int posicion){
+void insertarChar(char arreglo[],char caracter,int posicion)
+{
     arreglo[posicion]=caracter;
+}
+char buscarSiguienteChar(char arreglo1[],char arreglo2[],int* posicionArreglo1,int* posicionArreglo2,int validos1,int validos2)
+{
+    char caracter;
+    if(*posicionArreglo1<validos1 && *posicionArreglo2<validos2)
+    {
+        if (compararChar(arreglo1[*posicionArreglo1],arreglo2[*posicionArreglo2]))
+        {
+            caracter=arreglo1[*posicionArreglo1];
+            (*posicionArreglo1)++;
+        }
+        else
+        {
+            caracter=arreglo2[*posicionArreglo2];
+            (*posicionArreglo2)++;
+
+        }
+    }
+    else if(*posicionArreglo1==validos1)
+    {
+        caracter=arreglo2[*posicionArreglo2];
+        (*posicionArreglo2)++;
+    }
+    else
+    {
+        caracter=arreglo1[*posicionArreglo1];
+        (*posicionArreglo1)++;
+
+    }
+    return caracter;
+}
+
+/**
+*13.​Dado el vector {1,5,6,7,8} escribir un programa que genere otro vector con la suma del
+contenido de todo los elementos anteriores al índice actual: {1,6,12,19,27}.
+*/
+/**
+*La funcion recibe 2 arreglos con la misma cantidad de validos, y los suma miembro a miembro, luego retorna un vector con la suma de todos
+*/
+int sumarPorIndice(int arreglo1[],int arreglo2[],int arregloSuma[],int validos)
+{
+    for (int i=0; i<validos; i++)
+    {
+        arregloSuma[i]=arreglo1[i]+arreglo2[i];
+    }
+
 }
 
