@@ -59,7 +59,7 @@ números enteros.
 float promediarMatriz(int matriz[FILAS][COLUMNAS])
 {
     int suma=sumarElementos(matriz);
-    float promedio=suma/(FILAS*COLUMNAS);
+    float promedio=(float)suma/(FILAS*COLUMNAS);
     return promedio;
 }
 
@@ -77,6 +77,7 @@ int buscarElemento(int matriz[FILAS][COLUMNAS],int elemento)
             if (elemento==matriz[i][j])
             {
                 flag=1;
+                return flag;
             }
         }
     }
