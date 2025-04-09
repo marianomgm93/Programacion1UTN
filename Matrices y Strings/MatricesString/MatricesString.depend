@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1744144141 source:/home/mariano/practica C/Matrices y Strings/MatricesString/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
