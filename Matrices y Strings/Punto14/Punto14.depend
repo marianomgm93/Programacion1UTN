@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1744594129 source:c:\repositoriomariano\matrices y strings\punto14\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

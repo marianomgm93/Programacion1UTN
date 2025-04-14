@@ -12,3 +12,16 @@
 	"pila.h"
 	<math.h>
 
+1743019991 source:c:\repositoriomariano\funcionespilas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"pila.h"
+
+1743019991 c:\repositoriomariano\funcionespilas\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1743019991 source:c:\repositoriomariano\funcionespilas\pila.c
+	"pila.h"
+

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 const int FILAS=3;
 const int COLUMNAS=3;
 const int IN=1;
@@ -90,8 +91,9 @@ void menu(int matriz[FILAS][COLUMNAS])
     int status=IN;
     while(status==IN)
     {
+        int elemento;
         printf("0\tSalir\n1\tMostrar matriz\n2\tCargar Matriz\n3\tSumar elementos\n"
-               "4\tPromediar matriz\n5\tBuscar elemento 1=presente\n");
+               "4\tPromediar matriz\n5\tBuscar elemento 1=presente\n6\tElecciones\n");
         scanf(" %c",&option);
 
         switch(option)
@@ -113,10 +115,12 @@ void menu(int matriz[FILAS][COLUMNAS])
             printf("Promedio de matriz= %.2f\n",promediarMatriz(matriz));
             break;
         case '5':
-            int elemento;
             printf("Ingrese el elemento a buscar en la matriz:\n");
             scanf("%i",&elemento);
             printf("Resultado de la %i\n",buscarElemento(matriz,elemento));
+            break;
+        case '6':
+            elecciones(matriz);
             break;
         default:
             system("clear");
