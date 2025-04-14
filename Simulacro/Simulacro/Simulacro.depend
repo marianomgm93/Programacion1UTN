@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1490112218 source:/home/mariano/practica C/Matrices y Strings/Simulacro/Simulacro/pila.c
+	"pila.h"
+
+1490112218 /home/mariano/practica C/Matrices y Strings/Simulacro/Simulacro/pila.h
+	<stdio.h>
+	<malloc.h>
+
+1744651605 source:/home/mariano/practica C/Matrices y Strings/Simulacro/Simulacro/main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+
