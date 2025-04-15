@@ -11,3 +11,16 @@
 	<stdlib.h>
 	"pila.h"
 
+1744669529 source:c:\repositoriomariano\simulacro\simulacro\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+	<time.h>
+
+1744656774 c:\repositoriomariano\simulacro\simulacro\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1744656774 source:c:\repositoriomariano\simulacro\simulacro\pila.c
+	"pila.h"
+
