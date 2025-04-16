@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1744811309 source:d:\mariano\simulacro\simulacro2\pila.c
+	"pila.h"
+
+1744811309 d:\mariano\simulacro\simulacro2\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1744814817 source:d:\mariano\simulacro\simulacro2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"pila.h"
+

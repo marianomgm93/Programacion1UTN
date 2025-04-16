@@ -13,3 +13,14 @@
 	<time.h>
 	<string.h>
 
+1744811309 source:d:\mariano\practicasprimerparcial\primerparcialcustom\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+	<time.h>
+	<string.h>
+
+1744811309 d:\mariano\practicasprimerparcial\primerparcialcustom\pila.h
+	<stdio.h>
+	<malloc.h>
+
