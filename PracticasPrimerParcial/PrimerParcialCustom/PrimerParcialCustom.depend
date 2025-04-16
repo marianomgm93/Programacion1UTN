@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1743019991 source:c:\repositoriomariano\practicasprimerparcial\primerparcialcustom\pila.c
+	"pila.h"
+
+1743019991 c:\repositoriomariano\practicasprimerparcial\primerparcialcustom\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1744767412 source:c:\repositoriomariano\practicasprimerparcial\primerparcialcustom\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+	<time.h>
+	<string.h>
+
