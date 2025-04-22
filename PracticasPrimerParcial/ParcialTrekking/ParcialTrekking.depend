@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1745338008 source:d:\mariano\practicasprimerparcial\parcialtrekking\pila.c
+	"pila.h"
+
+1745338008 d:\mariano\practicasprimerparcial\parcialtrekking\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1745343408 source:d:\mariano\practicasprimerparcial\parcialtrekking\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pila.h"
+
