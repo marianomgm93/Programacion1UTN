@@ -2,34 +2,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#define DIM 30
-struct Posicion{
-    int x;
-    int y;
-};
-struct Item{
-    char nombre[DIM];
-    int cantidad;
-};
-struct Jugador
-{
-    char nombre[DIM];
-    int vida;
-    struct Posicion posicion;
-    struct Item items[DIM];
+#include "jugador.h"
 
-};
-int main()
-{
+int main() {
     srand(time(NULL));
     struct Jugador j1;
-    strcpy(j1.nombre,"Mariano");
-    j1.vida=rand()%10+15;
-    j1.posX = rand() % 10;
-    j1.posY = rand() % 10;
+    memset(j1.items, 0, sizeof(j1.items));
+    strcpy(j1.nombre, "Mariano");
+    j1.vida = rand() % 20 + 21;
+    j1.posicion.x = rand() % 10;
+    j1.posicion.y = rand() % 10;
 
-    printf("Jugador: %s\n", j1.nombre);
-    printf("Vida: %d\n", j1.vida);
-    printf("Posición: (%d, %d)\n", j1.posX, j1.posY);
+    agregarItem(&j1, "Espada", 1);
+    agregarItem(&j1, "Pocion", 3);
+    agregarItem(&j1, "ManaPotion", 1);
+
+    mostrarJugador(j1);
+
+    usarItem(&j1, "ManaPotion");
+    usarItem(&j1, "Pocion");
+
+    mostrarJugador(j1);
+
     return 0;
 }
