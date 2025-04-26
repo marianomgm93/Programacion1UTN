@@ -1,30 +1,25 @@
 #ifndef JUGADOR_H_INCLUDED
 #define JUGADOR_H_INCLUDED
 
-#define DIM 30
+#include "item.h"
+#include "estadisticas.h"
 
-struct Posicion {
+struct Coordenada {
     int x;
     int y;
 };
 
-struct Item {
-    char nombre[DIM];
-    int cantidad;
-};
-
 struct Jugador {
-    char nombre[DIM];
+    char nombre[30];
     int vida;
-    struct Posicion posicion;
+    struct Coordenada posicion;
     struct Item items[DIM];
     struct Estadisticas stats;
+    struct Item itemEquipado;
+    int tieneItemEquipado;
 };
 
 void mostrarJugador(struct Jugador jugador);
-void agregarItem(struct Jugador *jugador, char nombreItem[], int cantidad);
-void eliminarItem(struct Jugador *jugador, char nombreItem[]);
-int buscarItem(struct Jugador *jugador, char nombreItem[]);
-void usarItem(struct Jugador *jugador, char nombreItem[]);
-
+void desequiparItem(struct Jugador *jugador);
 #endif // JUGADOR_H_INCLUDED
+

@@ -5,9 +5,11 @@ struct Estadisticas{
     int defensa;
     int velocidad;
     int suerte;
-    int magia;
+    int inteligencia;
 
 };
+
+struct Estadisticas inicializarEstadisticas();
 
 
 #endif // ESTADISTICAS_H_INCLUDED

@@ -1,7 +1,18 @@
 #include <stdio.h>
-#include <string.h>
 #include "jugador.h"
+#include <string.h>
 #include "estadisticas.h"
+#include "item.h"
+
+void inicializarJugador(struct Jugador jugador, char nombre[]){
+    strcpy(jugador->nombre,nombre);
+    jugador->vida=rand()%11+10;
+    jugador->posicion.x=rand()10%;
+    jugador->posicion.y=rand()10%;
+    memset(jugador->items,0,sizeof(jugador->items));
+    jugador->estadisticas=inicializarEstadisticas();
+
+}
 void mostrarJugador(struct Jugador jugador)
 {
     printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador.nombre, jugador.vida, jugador.posicion.x, jugador.posicion.y);
@@ -12,87 +23,40 @@ void mostrarJugador(struct Jugador jugador)
             printf("%s.......x%i\n", jugador.items[i].nombre, jugador.items[i].cantidad);
         }
     }
-}
 
-void agregarItem(struct Jugador *jugador, char nombreItem[], int cantidad)
-{
-    int i = 0;
-    while (i < DIM && strcmp(jugador->items[i].nombre, nombreItem) != 0)
+    printf("Estadísticas:\n");
+    printf("Ataque: %i\n", jugador.estadisticas.ataque);
+    printf("Defensa: %i\n", jugador.estadisticas.defensa);
+    printf("Velocidad: %i\n", jugador.estadisticas.velocidad);
+    printf("Suerte: %i\n", jugador.estadisticas.suerte);
+    printf("Inteligencia: %i\n", jugador.estadisticas.inteligencia);
+    if (jugador.tieneItemEquipado)
     {
-        i++;
-    }
-    if (i < DIM && strcmp(jugador->items[i].nombre, nombreItem) == 0)
-    {
-        jugador->items[i].cantidad += cantidad;
+        printf("Ítem equipado: %s\n", jugador.itemEquipado.nombre);
     }
     else
     {
-        i = 0;
-        while (i < DIM && jugador->items[i].cantidad != 0)
-        {
-            i++;
-        }
-        if (i < DIM)
-        {
-            strcpy(jugador->items[i].nombre, nombreItem);
-            jugador->items[i].cantidad = cantidad;
-        }
-        else
-        {
-            printf("Inventario lleno. No se pudo agregar el item %s\n", nombreItem);
-        }
+        printf("No tiene ningún ítem equipado.\n");
     }
 }
 
-
-int buscarItem(struct Jugador *jugador, char nombreItem[])
-{
-    for (int i = 0; i < DIM; i++)
-    {
-        if (stricmp(jugador->items[i].nombre, nombreItem) == 0)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-/**
-*@Param Si el item existe, lo elimina, retorna 1 si se realizó correctamente, 0 si el item no existia en el inventario;
-*/
-int eliminarItem(struct Jugador *jugador, char nombreItem[])
-{
-    int itemSocket=buscarItem(jugador,nombreItem);
-    if(itemSocket!=-1)
-    {
-        jugador->items[itemSocket].cantidad = 0;
-        jugador->items[itemSocket].nombre[0] = '\0';
-        return 1;
-    }
-    return 0;
-}
-/**
-*@Param Se utiliza el item, si no quedan mas, se eliminan del inventario;
-*/
-void usarItem(struct Jugador *jugador, char nombreItem[])
-{
+void equiparItem(struct Jugador *jugador, char nombreItem[]) {
     int itemSocket = buscarItem(jugador, nombreItem);
-    if (itemSocket != -1)
-    {
-        jugador->items[itemSocket].cantidad--;
-        if (jugador->items[itemSocket].cantidad == 0)
-        {
-            if (eliminarItem(jugador, nombreItem))
-            {
-                printf("Item '%s' fue eliminado del inventario.\n", nombreItem);
-            }
-            else
-            {
-                printf("Hubo un error al intentar eliminar el item '%s'.\n", nombreItem);
-            }
-        }
+
+    if (itemSocket != -1) {
+        jugador->itemEquipado = jugador->items[itemSocket];
+        jugador->tieneItemEquipado = 1;
+        printf("Has equipado el ítem '%s'.\n", jugador->itemEquipado.nombre);
+    } else {
+        printf("El ítem '%s' no está en el inventario.\n", nombreItem);
     }
-    else
-    {
-        printf("No tengo más %s\n", nombreItem);
+}
+void desequiparItem(struct Jugador *jugador){
+    if (jugador->tieneItemEquipado){
+        jugador->itemEquipado.nombre[0]='\0';
+        jugador->itemEquipado.cantidad=0;
+        jugador->tieneItemEquipado=0;
+        printf("Has desequipado el ítem.\n");
     }
+
 }

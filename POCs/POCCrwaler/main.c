@@ -23,6 +23,16 @@ int main() {
     usarItem(&j1, "Pocion");
 
     mostrarJugador(j1);
+while (1) {
+    char tecla = getch();
 
+    switch (tecla) {
+        case 'w': moverArriba(); break;
+        case 's': moverAbajo(); break;
+        case 'a': moverIzquierda(); break;
+        case 'd': moverDerecha(); break;
+        case 'q': return; // salir del juego
+    }
+}
     return 0;
 }
