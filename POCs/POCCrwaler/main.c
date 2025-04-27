@@ -1,38 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "mapa.h"
 #include <time.h>
 #include "jugador.h"
-
+#include "movimiento.h"
 int main() {
     srand(time(NULL));
-    struct Jugador j1;
-    memset(j1.items, 0, sizeof(j1.items));
-    strcpy(j1.nombre, "Mariano");
-    j1.vida = rand() % 20 + 21;
-    j1.posicion.x = rand() % 10;
-    j1.posicion.y = rand() % 10;
+    struct Jugador jugador;
+    struct Mapa mapa;
 
-    agregarItem(&j1, "Espada", 1);
-    agregarItem(&j1, "Pocion", 3);
-    agregarItem(&j1, "ManaPotion", 1);
+    // Inicialización
+    inicializarJugador(&jugador, "Jugador 1");
+    inicializarMapa(&mapa, 100, 100);
 
-    mostrarJugador(j1);
+    // Colocamos algunas paredes internas (¡como diseñamos!)
+    mapa.celdas[2][3] = '#';
+    mapa.celdas[2][4] = '#';
+    mapa.celdas[4][5] = '#';
+    mapa.celdas[7][3] = '#';
 
-    usarItem(&j1, "ManaPotion");
-    usarItem(&j1, "Pocion");
+    // Inicializamos al jugador    jugador.posicion.x = 1; // Empezamos en una casilla libre
+    jugador.posicion.y = 1;
 
-    mostrarJugador(j1);
-while (1) {
-    char tecla = getch();
+    // Mostrar mapa con el jugador
+    dibujarMapa(&jugador, &mapa);
 
-    switch (tecla) {
-        case 'w': moverArriba(); break;
-        case 's': moverAbajo(); break;
-        case 'a': moverIzquierda(); break;
-        case 'd': moverDerecha(); break;
-        case 'q': return; // salir del juego
-    }
+
+    while (1) {
+        system("cls");
+        dibujarMapa(&jugador, &mapa); // Mostrar el mapa
+        mostrarJugador(&jugador); // Mostrar información del jugador
+
+        // Capturar dirección del jugador
+        enum Direccion direccion = capturarDireccion();
+        moverJugador(&jugador, direccion); // Mover al jugador
 }
-    return 0;
 }

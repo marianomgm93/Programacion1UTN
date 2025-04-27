@@ -3,40 +3,41 @@
 #include <string.h>
 #include "estadisticas.h"
 #include "item.h"
-
-void inicializarJugador(struct Jugador jugador, char nombre[]){
+#include "mapa.h"
+#include "movimiento.h"
+void inicializarJugador(struct Jugador *jugador, char nombre[]){
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
-    jugador->posicion.x=rand()10%;
-    jugador->posicion.y=rand()10%;
+    jugador->posicion.x=rand()%MAPDIM;
+    jugador->posicion.y=rand()%MAPDIM;
     memset(jugador->items,0,sizeof(jugador->items));
-    jugador->estadisticas=inicializarEstadisticas();
+    jugador->stats=inicializarEstadisticas();
 
 }
-void mostrarJugador(struct Jugador jugador)
+void mostrarJugador(struct Jugador *jugador)
 {
-    printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador.nombre, jugador.vida, jugador.posicion.x, jugador.posicion.y);
+    printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador->nombre, jugador->vida, jugador->posicion.x, jugador->posicion.y);
     for (int i = 0; i < DIM; i++)
     {
-        if (jugador.items[i].cantidad != 0)
+        if (jugador->items[i].cantidad != 0)
         {
-            printf("%s.......x%i\n", jugador.items[i].nombre, jugador.items[i].cantidad);
+            printf("%s.......x%i\n", jugador->items[i].nombre, jugador->items[i].cantidad);
         }
     }
 
     printf("Estadísticas:\n");
-    printf("Ataque: %i\n", jugador.estadisticas.ataque);
-    printf("Defensa: %i\n", jugador.estadisticas.defensa);
-    printf("Velocidad: %i\n", jugador.estadisticas.velocidad);
-    printf("Suerte: %i\n", jugador.estadisticas.suerte);
-    printf("Inteligencia: %i\n", jugador.estadisticas.inteligencia);
-    if (jugador.tieneItemEquipado)
+    printf("Ataque: %i\n", jugador->stats.ataque);
+    printf("Defensa: %i\n", jugador->stats.defensa);
+    printf("Velocidad: %i\n", jugador->stats.velocidad);
+    printf("Suerte: %i\n", jugador->stats.suerte);
+    printf("Inteligencia: %i\n", jugador->stats.inteligencia);
+    if (jugador->tieneItemEquipado)
     {
-        printf("Ítem equipado: %s\n", jugador.itemEquipado.nombre);
+        printf("Ítem equipado: %s\n", jugador->itemEquipado.nombre);
     }
     else
     {
-        printf("No tiene ningún ítem equipado.\n");
+        printf("No tiene ningun item equipado.\n");
     }
 }
 

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "movimiento.h"
-#define MAPDIM 20
+
 
 enum Direccion capturarDireccion() {
     char tecla = getch();

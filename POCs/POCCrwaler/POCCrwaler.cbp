@@ -36,6 +36,12 @@
 		<Unit filename="include/estadisticas.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="include/evento.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="include/habitacion.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="include/item.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
@@ -51,22 +57,26 @@
 		</Unit>
 		<Unit filename="src/estadisticas.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/evento.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="src/habitacion.c">
+			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/item.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/jugador.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/mapa.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/movimiento.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<lib_finder disable_auto="1" />

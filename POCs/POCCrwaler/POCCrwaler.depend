@@ -1,7 +1,55 @@
 # depslib dependency file v1.0
-1745540710 source:c:\repositoriomariano\pocs\poccrwaler\main.c
+1745700802 source:c:\repositoriomariano\pocs\poccrwaler\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	"mapa.h"
 	<time.h>
+	"jugador.h"
+	"movimiento.h"
+
+1745700796 c:\repositoriomariano\pocs\poccrwaler\include\mapa.h
+	"jugador.h"
+
+1745695633 c:\repositoriomariano\pocs\poccrwaler\include\jugador.h
+	"item.h"
+	"estadisticas.h"
+
+1745613117 c:\repositoriomariano\pocs\poccrwaler\include\item.h
+
+1745616667 c:\repositoriomariano\pocs\poccrwaler\include\estadisticas.h
+
+1745698486 c:\repositoriomariano\pocs\poccrwaler\include\movimiento.h
+	"mapa.h"
+	"jugador.h"
+	"conio.h"
+
+1745698552 source:c:\repositoriomariano\pocs\poccrwaler\src\jugador.c
+	<stdio.h>
+	"jugador.h"
+	<string.h>
+	"estadisticas.h"
+	"item.h"
+	"mapa.h"
+	"movimiento.h"
+
+1745541998 source:c:\repositoriomariano\pocs\poccrwaler\src\jugador.cpp
+	"jugador.h"
+
+1745616858 source:c:\repositoriomariano\pocs\poccrwaler\src\estadisticas.c
+	<stdio.h>
+	"estadisticas.h"
+
+1745613178 source:c:\repositoriomariano\pocs\poccrwaler\src\item.c
+	<stdio.h>
+	<string.h>
+	"item.h"
+
+1745700699 source:c:\repositoriomariano\pocs\poccrwaler\src\mapa.c
+	<stdio.h>
+	"mapa.h"
+
+1745696539 source:c:\repositoriomariano\pocs\poccrwaler\src\movimiento.c
+	<stdio.h>
+	"movimiento.h"
 

@@ -18,8 +18,10 @@ struct Jugador {
     struct Item itemEquipado;
     int tieneItemEquipado;
 };
-
-void mostrarJugador(struct Jugador jugador);
+void inicializarJugador(struct Jugador *jugador, char nombre[]);
+void mostrarJugador(struct Jugador *jugador);
 void desequiparItem(struct Jugador *jugador);
+void equiparItem(struct Jugador *jugador, char nombreItem[]);
+
 #endif // JUGADOR_H_INCLUDED
 

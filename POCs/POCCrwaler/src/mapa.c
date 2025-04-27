@@ -1,33 +1,20 @@
 #include <stdio.h>
 #include "mapa.h"
+#define VENTANA_ANCHO 20
+#define VENTANA_ALTO 10
+void inicializarMapa(struct Mapa *mapa, int alto, int ancho) {
+    mapa->alto = alto;
+    mapa->ancho = ancho;
 
-void inicializarMapa(struct Mapa *mapa,int alto,int ancho,char simbolo)
-{
-    mapa->alto=alto;
-    mapa->ancho=ancho;
-    for(int y=0; y<alto; y++)
-    {
-        for(int x=0; x<ancho; x++)
-        {
-            mapa->celdas[y][x]=simbolo;
+    // Crear el mapa con paredes
+    for (int y = 0; y < alto; y++) {
+        for (int x = 0; x < ancho; x++) {
+            // Paredes en los bordes: primer fila, última fila, primera columna, última columna
+            if (x == 0 || x == ancho - 1 || y == 0 || y == alto - 1) {
+                mapa->celdas[y][x] = PARED;  // Pared en los bordes
+            } else {
+                mapa->celdas[y][x] = VACIO;  // Espacio vacío en el interior
+            }
         }
     }
-}
-
-void dibujarMapa(struct Jugador *jugador, struct Mapa *mapa)
-{
-    float rVisionBase = (mapa->alto * mapa->ancho) * 0.02;
-    int rVisionJugador = (int)(rVisionBase + 0.005 * jugador->stats.inteligencia);
-    //delimitado
-    int minY = jugador->posicion.y - rVisionJugador;
-    if (minY < 0) minY = 0;
-
-    int maxY = jugador->posicion.y + rVisionJugador;
-    if (maxY >= mapa.alto) maxY = mapa.alto - 1;
-
-    int minX = jugador->posicion.x - rVisionJugador;
-    if (minX < 0) minX = 0;
-
-    int maxX = jugador->posicion.x + rVisionJugador;
-    if (maxX >= mapa.ancho) maxX = mapa.ancho - 1;
 }
