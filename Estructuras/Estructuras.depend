@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1745945153 source:d:\mariano\estructuras\stalumno.c
+	<stdio.h>
+	"stAlumno.h"
+
+1745947637 d:\mariano\estructuras\stalumno.h
+	<string.h>
+
+1745947866 source:d:\mariano\estructuras\main.c
+	<stdio.h>
+	<stdlib.h>
+	"stAlumno.h"
+	<conio.h>
+
