@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1745888927 source:/home/mariano/practica C/ArreglosParalelos/ArreglosParalelos/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
