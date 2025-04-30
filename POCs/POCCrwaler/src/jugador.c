@@ -5,7 +5,8 @@
 #include "item.h"
 #include "mapa.h"
 #include "movimiento.h"
-void inicializarJugador(struct Jugador *jugador, char nombre[]){
+void inicializarJugador(struct Jugador *jugador, char nombre[])
+{
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
     jugador->posicion.x=rand()%MAPDIM;
@@ -14,17 +15,12 @@ void inicializarJugador(struct Jugador *jugador, char nombre[]){
     jugador->stats=inicializarEstadisticas();
 
 }
+
 void mostrarJugador(struct Jugador *jugador)
 {
     printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador->nombre, jugador->vida, jugador->posicion.x, jugador->posicion.y);
-    for (int i = 0; i < DIM; i++)
-    {
-        if (jugador->items[i].cantidad != 0)
-        {
-            printf("%s.......x%i\n", jugador->items[i].nombre, jugador->items[i].cantidad);
-        }
-    }
 
+    mostrarInventario(*jugador);
     printf("Estadísticas:\n");
     printf("Ataque: %i\n", jugador->stats.ataque);
     printf("Defensa: %i\n", jugador->stats.defensa);
@@ -41,23 +37,41 @@ void mostrarJugador(struct Jugador *jugador)
     }
 }
 
-void equiparItem(struct Jugador *jugador, char nombreItem[]) {
+void equiparItem(struct Jugador *jugador, char nombreItem[])
+{
     int itemSocket = buscarItem(jugador, nombreItem);
 
-    if (itemSocket != -1) {
+    if (itemSocket != -1)
+    {
         jugador->itemEquipado = jugador->items[itemSocket];
         jugador->tieneItemEquipado = 1;
         printf("Has equipado el ítem '%s'.\n", jugador->itemEquipado.nombre);
-    } else {
+    }
+    else
+    {
         printf("El ítem '%s' no está en el inventario.\n", nombreItem);
     }
 }
-void desequiparItem(struct Jugador *jugador){
-    if (jugador->tieneItemEquipado){
+
+void desequiparItem(struct Jugador *jugador)
+{
+    if (jugador->tieneItemEquipado)
+    {
         jugador->itemEquipado.nombre[0]='\0';
         jugador->itemEquipado.cantidad=0;
         jugador->tieneItemEquipado=0;
         printf("Has desequipado el ítem.\n");
+    }
+}
+void mostrarInventario(struct Jugador jugador)
+{
+
+    for (int i = 0; i < DIM; i++)
+    {
+        if (jugador.items[i].cantidad > 0)
+        {
+            printf("%s.......x%i\n", jugador.items[i].nombre, jugador.items[i].cantidad);
+        }
     }
 
 }

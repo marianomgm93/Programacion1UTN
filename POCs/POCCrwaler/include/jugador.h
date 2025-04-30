@@ -17,11 +17,13 @@ struct Jugador {
     struct Estadisticas stats;
     struct Item itemEquipado;
     int tieneItemEquipado;
+
 };
 void inicializarJugador(struct Jugador *jugador, char nombre[]);
 void mostrarJugador(struct Jugador *jugador);
 void desequiparItem(struct Jugador *jugador);
 void equiparItem(struct Jugador *jugador, char nombreItem[]);
+void mostrarInventario(struct Jugador jugador);
 
 #endif // JUGADOR_H_INCLUDED
 

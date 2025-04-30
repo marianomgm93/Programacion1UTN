@@ -24,12 +24,12 @@ int main() {
     jugador.posicion.y = 1;
 
     // Mostrar mapa con el jugador
-    dibujarMapa(&jugador, &mapa);
+    //dibujarMapa(&jugador, &mapa);
 
 
     while (1) {
         system("cls");
-        dibujarMapa(&jugador, &mapa); // Mostrar el mapa
+        //dibujarMapa(&jugador, &mapa); // Mostrar el mapa
         mostrarJugador(&jugador); // Mostrar información del jugador
 
         // Capturar dirección del jugador

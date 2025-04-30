@@ -53,3 +53,54 @@
 	<stdio.h>
 	"movimiento.h"
 
+1746023196 source:d:\mariano\pocs\poccrwaler\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mapa.h"
+	<time.h>
+	"jugador.h"
+	"movimiento.h"
+
+1746023196 d:\mariano\pocs\poccrwaler\include\mapa.h
+	"jugador.h"
+
+1746034363 d:\mariano\pocs\poccrwaler\include\jugador.h
+	"item.h"
+	"estadisticas.h"
+
+1746023196 d:\mariano\pocs\poccrwaler\include\item.h
+
+1746023196 d:\mariano\pocs\poccrwaler\include\estadisticas.h
+
+1746023196 d:\mariano\pocs\poccrwaler\include\movimiento.h
+	"mapa.h"
+	"jugador.h"
+	"conio.h"
+
+1746023196 source:d:\mariano\pocs\poccrwaler\src\estadisticas.c
+	<stdio.h>
+	"estadisticas.h"
+
+1746023196 source:d:\mariano\pocs\poccrwaler\src\item.c
+	<stdio.h>
+	<string.h>
+	"item.h"
+
+1746023196 source:d:\mariano\pocs\poccrwaler\src\mapa.c
+	<stdio.h>
+	"mapa.h"
+
+1746023196 source:d:\mariano\pocs\poccrwaler\src\movimiento.c
+	<stdio.h>
+	"movimiento.h"
+
+1746034442 source:d:\mariano\pocs\poccrwaler\src\jugador.c
+	<stdio.h>
+	"jugador.h"
+	<string.h>
+	"estadisticas.h"
+	"item.h"
+	"mapa.h"
+	"movimiento.h"
+
