@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include "habitacion.h"
-
-void inicializarHabitacion(struct Habitacion *habitacion){
-        for(int i=0;i<MAX_EVENTOS;i++){
-            habitacion->eventos[i]=inicializarEvento;
-        }
+void inicializarHabitacion(Habitacion *habitacion,int posicion)
+{
+    habitacion->numeroHabitacion=posicion;
+    for(int i=0; i<MAX_EVENTOS; i++)
+    {
+        inicializarEvento(&(habitacion->eventos[i]));
+    }
 
 }

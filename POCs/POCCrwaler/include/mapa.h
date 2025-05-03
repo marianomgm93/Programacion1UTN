@@ -6,14 +6,16 @@
 #include "jugador.h"
 #define PARED '#'
 #define VACIO '.'
-
+#define LARGO_PARTIDA 100
+#include "habitacion.h"
+#include "evento.h"
 struct Mapa {
-    int ancho;
-    int alto;
-    char celdas[MAX_ALTO][MAX_ANCHO];
+    int diasTotales;
+    int diaActual;
+    Habitacion habitaciones[LARGO_PARTIDA];
 };
-void inicializarMapa(struct Mapa *mapa,int alto, int ancho);
-void dibujarMapa(struct Jugador *jugador,struct Mapa *mapa);
+void inicializarMapa(struct Mapa *mapa,int diasTotales);
+void dibujarMapa(struct Jugador *jugador,struct Mapa mapa);
 
 
 #endif // MAPA_H_INCLUDED

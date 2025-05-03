@@ -1,16 +1,16 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "jugador.h"
 #include <string.h>
 #include "estadisticas.h"
 #include "item.h"
 #include "mapa.h"
 #include "movimiento.h"
-void inicializarJugador(struct Jugador *jugador, char nombre[])
+void inicializarJugador(struct Jugador* jugador, char nombre[], struct Mapa* mapa)
 {
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
-    jugador->posicion.x=rand()%MAPDIM;
-    jugador->posicion.y=rand()%MAPDIM;
+    jugador->habitacionActual=mapa->habitaciones[0];
     memset(jugador->items,0,sizeof(jugador->items));
     jugador->stats=inicializarEstadisticas();
 
@@ -18,10 +18,10 @@ void inicializarJugador(struct Jugador *jugador, char nombre[])
 
 void mostrarJugador(struct Jugador *jugador)
 {
-    printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador->nombre, jugador->vida, jugador->posicion.x, jugador->posicion.y);
+    printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador->nombre, jugador->vida);
 
     mostrarInventario(*jugador);
-    printf("Estadísticas:\n");
+    printf("Estadisticas:\n");
     printf("Ataque: %i\n", jugador->stats.ataque);
     printf("Defensa: %i\n", jugador->stats.defensa);
     printf("Velocidad: %i\n", jugador->stats.velocidad);
@@ -29,7 +29,7 @@ void mostrarJugador(struct Jugador *jugador)
     printf("Inteligencia: %i\n", jugador->stats.inteligencia);
     if (jugador->tieneItemEquipado)
     {
-        printf("Ítem equipado: %s\n", jugador->itemEquipado.nombre);
+        printf("Item equipado: %s\n", jugador->itemEquipado.nombre);
     }
     else
     {

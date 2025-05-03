@@ -11,29 +11,29 @@ int main() {
     struct Mapa mapa;
 
     // Inicialización
-    inicializarJugador(&jugador, "Jugador 1");
-    inicializarMapa(&mapa, 100, 100);
+    inicializarJugador(&jugador, "Jugador 1",&mapa);
+    inicializarMapa(&mapa, 100);
+    struct Item oro;
+    oro.cantidad=500;
+    strcpy(oro.nombre,"Oro");
+    jugador.items[0]=oro;
 
-    // Colocamos algunas paredes internas (¡como diseñamos!)
-    mapa.celdas[2][3] = '#';
-    mapa.celdas[2][4] = '#';
-    mapa.celdas[4][5] = '#';
-    mapa.celdas[7][3] = '#';
-
-    // Inicializamos al jugador    jugador.posicion.x = 1; // Empezamos en una casilla libre
-    jugador.posicion.y = 1;
 
     // Mostrar mapa con el jugador
     //dibujarMapa(&jugador, &mapa);
 
 
+
     while (1) {
         system("cls");
-        //dibujarMapa(&jugador, &mapa); // Mostrar el mapa
+        dibujarMapa(&jugador, mapa);
+
         mostrarJugador(&jugador); // Mostrar información del jugador
 
         // Capturar dirección del jugador
         enum Direccion direccion = capturarDireccion();
-        moverJugador(&jugador, direccion); // Mover al jugador
+        //moverJugador(&jugador, direccion); // Mover al jugador
+        mapa.diaActual++;
+        jugador.habitacionActual=mapa.habitaciones[mapa.diaActual];
 }
 }

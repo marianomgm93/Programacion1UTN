@@ -2,19 +2,43 @@
 #include "mapa.h"
 #define VENTANA_ANCHO 20
 #define VENTANA_ALTO 10
-void inicializarMapa(struct Mapa *mapa, int alto, int ancho) {
-    mapa->alto = alto;
-    mapa->ancho = ancho;
+#include "habitacion.h"
 
-    // Crear el mapa con paredes
-    for (int y = 0; y < alto; y++) {
-        for (int x = 0; x < ancho; x++) {
-            // Paredes en los bordes: primer fila, última fila, primera columna, última columna
-            if (x == 0 || x == ancho - 1 || y == 0 || y == alto - 1) {
-                mapa->celdas[y][x] = PARED;  // Pared en los bordes
-            } else {
-                mapa->celdas[y][x] = VACIO;  // Espacio vacío en el interior
-            }
-        }
+void inicializarMapa(struct Mapa* mapa,int dias)
+{
+    mapa->diasTotales=dias;
+    mapa->diaActual=0;
+    for(int i=0; i<mapa->diasTotales; i++)
+    {
+        inicializarHabitacion(&(mapa->habitaciones[i]),i);
+
     }
 }
+
+void dibujarMapa(struct Jugador* jugador,struct Mapa mapa)
+{
+    char tipo[DIM];
+
+    for(int i=0; i<MAX_EVENTOS; i++)
+    {
+        switch(mapa.habitaciones[i].eventos[i].tipo)
+        {
+        case TESORO:
+            strcpy(tipo,"TESORO");
+            break;
+        case MISION:
+            strcpy(tipo,"MISION");
+            break;
+        case COMBATE:
+            strcpy(tipo,"COMBATE");
+            break;
+        case TIENDA:
+            strcpy(tipo,"TIENDA");
+            break;
+        }
+        printf("Camino %i: %s\n",i+1,tipo);
+
+    }
+}
+
+

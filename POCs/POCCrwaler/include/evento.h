@@ -1,6 +1,7 @@
 #ifndef EVENTO_H_INCLUDED
 #define EVENTO_H_INCLUDED
 #include "item.h"
+
 typedef enum{
     TESORO,
     COMBATE,
@@ -17,11 +18,11 @@ struct CombateData{
 
 };
 struct MisionData{
-    char idObjeto[];
+    char idObjeto[DIM];
 
 };
 struct TiendaData{
-    struct Item itemsEnVenta[];
+    struct Item itemsEnVenta[5];
     int puedeDescansar;
 
 };
@@ -32,11 +33,12 @@ union DatosEvento{
     struct TiendaData tienda;
 };
 
-struct Evento{
+typedef struct Evento{
     TipoEvento tipo;
     int nivelEspecial;//booleano si, no;
     union DatosEvento datos;
-};
-void inicializarEvento(struct Evento evento);
+}Evento;
+
+void inicializarEvento(Evento* evento);
 
 #endif // EVENTO_H_INCLUDED
