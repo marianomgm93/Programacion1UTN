@@ -3,20 +3,19 @@
 #include <string.h>
 #include "evento.h"
 #include "jugador.h"
-void inicializarEvento(Evento* evento)
+#include "enemigo.h"
+void inicializarEvento(Evento* evento,int nivel)
 {
     evento->tipo=rand()%4;
     evento->nivelEspecial=rand()%2;
-
     switch(evento->tipo)
     {
     case TESORO:
-        evento->datos.tesoro.cantidadOro=500;
+        evento->datos.tesoro.cantidadOro=500*nivel;
         evento->datos.tesoro.rarezaObjeto=rand()%4;
         break;
     case COMBATE:
-        evento->datos.combate.enemigos=rand()%3;
-        evento->datos.combate.nivelEnemigos=rand()%10+1;
+        //evento->datos.combate.enemigo=constructorEnemigo(nivel,rand()%4);
         break;
     case MISION:
         //evento->datos.mision.idObjeto="";
@@ -27,14 +26,19 @@ void inicializarEvento(Evento* evento)
         break;
     }
 }
-void seleccionarEvento(Evento evento, struct Jugador* jugador){
-        switch(evento.tipo)
+void seleccionarEvento(Evento evento, struct Jugador* jugador)
+{
+    switch(evento.tipo)
     {
     case TESORO:
         jugador->items[0].cantidad+=evento.datos.tesoro.cantidadOro;
         break;
     case COMBATE:
-        jugador->vida--;
+        int dmg = jugador->stats.defensa - evento.datos.combate.enemigo.stats.ataque;
+        if (dmg < 0)
+            jugador->vida += dmg;
+        else
+            printf("MISS\n");
         break;
     case MISION:
         //evento->datos.mision.idObjeto="";

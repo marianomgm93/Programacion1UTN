@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1746236805 source:c:\repositoriomariano\pocs\poccrwaler\main.c
+1746315426 source:c:\repositoriomariano\pocs\poccrwaler\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -8,16 +8,18 @@
 	"jugador.h"
 	"movimiento.h"
 
-1746233699 c:\repositoriomariano\pocs\poccrwaler\include\mapa.h
+1746319981 c:\repositoriomariano\pocs\poccrwaler\include\mapa.h
 	"jugador.h"
-	"habitacion.h"
 	"evento.h"
+	"habitacion.h"
 
-1746233853 c:\repositoriomariano\pocs\poccrwaler\include\jugador.h
+1746319718 c:\repositoriomariano\pocs\poccrwaler\include\jugador.h
 	"habitacion.h"
 	"item.h"
 	"estadisticas.h"
 	"mapa.h"
+	"enemigo.h"
+	"evento.h"
 
 1745613117 c:\repositoriomariano\pocs\poccrwaler\include\item.h
 
@@ -28,7 +30,7 @@
 	"jugador.h"
 	"conio.h"
 
-1746231784 source:c:\repositoriomariano\pocs\poccrwaler\src\jugador.c
+1746304179 source:c:\repositoriomariano\pocs\poccrwaler\src\jugador.c
 	<stdio.h>
 	<stdlib.h>
 	"jugador.h"
@@ -50,7 +52,7 @@
 	<string.h>
 	"item.h"
 
-1746236210 source:c:\repositoriomariano\pocs\poccrwaler\src\mapa.c
+1746303804 source:c:\repositoriomariano\pocs\poccrwaler\src\mapa.c
 	<stdio.h>
 	"mapa.h"
 	"habitacion.h"
@@ -111,11 +113,14 @@
 	"mapa.h"
 	"movimiento.h"
 
-1746236158 c:\repositoriomariano\pocs\poccrwaler\include\habitacion.h
+1746319931 c:\repositoriomariano\pocs\poccrwaler\include\habitacion.h
 	"evento.h"
 
-1746228882 c:\repositoriomariano\pocs\poccrwaler\include\evento.h
+1746319497 c:\repositoriomariano\pocs\poccrwaler\include\evento.h
 	"item.h"
+	"enemigo.h"
+	"mapa.h"
+	"jugador.h"
 
 1746236137 source:c:\repositoriomariano\pocs\poccrwaler\src\habitacion.c
 	<stdio.h>
@@ -127,4 +132,13 @@
 	<string.h>
 	"evento.h"
 	"jugador.h"
+
+1746316268 c:\repositoriomariano\pocs\poccrwaler\include\enemigo.h
+	<string.h>
+	"estadisticas.h"
+
+1746317621 source:c:\repositoriomariano\pocs\poccrwaler\src\enemigo.c
+	<stdlib.h>
+	<stdio.h>
+	"enemigo.h"
 

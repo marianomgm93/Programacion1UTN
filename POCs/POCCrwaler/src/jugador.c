@@ -1,16 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "jugador.h"
 #include <string.h>
+#include "jugador.h"
 #include "estadisticas.h"
 #include "item.h"
 #include "mapa.h"
 #include "movimiento.h"
-void inicializarJugador(struct Jugador* jugador, char nombre[], struct Mapa* mapa)
+#include "habitacion.h"
+#include "evento.h"
+void inicializarJugador(struct Jugador* jugador, char nombre[], Mapa* mapa)
 {
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
-    jugador->habitacionActual=mapa->habitaciones[0];
+    jugador->habitacionActual=mapa->habitaciones[mapa->diaActual];
     memset(jugador->items,0,sizeof(jugador->items));
     jugador->stats=inicializarEstadisticas();
 
@@ -18,7 +20,7 @@ void inicializarJugador(struct Jugador* jugador, char nombre[], struct Mapa* map
 
 void mostrarJugador(struct Jugador *jugador)
 {
-    printf("Nombre: %s\nHP: %i\nPosicion: %i,%i\nItems:\n", jugador->nombre, jugador->vida);
+    printf("Nombre: %s\nHP: %i\nDia actual: %i\nItems:\n", jugador->nombre, jugador->vida,jugador->habitacionActual.numeroHabitacion);
 
     mostrarInventario(*jugador);
     printf("Estadisticas:\n");

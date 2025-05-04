@@ -7,15 +7,17 @@
 #define PARED '#'
 #define VACIO '.'
 #define LARGO_PARTIDA 100
-#include "habitacion.h"
 #include "evento.h"
-struct Mapa {
+#include "habitacion.h"
+
+typedef struct {
     int diasTotales;
     int diaActual;
     Habitacion habitaciones[LARGO_PARTIDA];
-};
-void inicializarMapa(struct Mapa *mapa,int diasTotales);
-void dibujarMapa(struct Jugador *jugador,struct Mapa mapa);
+} Mapa;
+
+void inicializarMapa(Mapa *mapa,int diasTotales);
+void dibujarMapa(struct Jugador *jugador,Mapa mapa);
 
 
 #endif // MAPA_H_INCLUDED

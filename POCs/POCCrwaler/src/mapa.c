@@ -4,7 +4,7 @@
 #define VENTANA_ALTO 10
 #include "habitacion.h"
 
-void inicializarMapa(struct Mapa* mapa,int dias)
+void inicializarMapa(Mapa* mapa,int dias)
 {
     mapa->diasTotales=dias;
     mapa->diaActual=0;
@@ -15,13 +15,13 @@ void inicializarMapa(struct Mapa* mapa,int dias)
     }
 }
 
-void dibujarMapa(struct Jugador* jugador,struct Mapa mapa)
+void dibujarMapa(struct Jugador* jugador,Mapa mapa)
 {
     char tipo[DIM];
 
     for(int i=0; i<MAX_EVENTOS; i++)
     {
-        switch(mapa.habitaciones[i].eventos[i].tipo)
+        switch(mapa.habitaciones[mapa.diaActual].eventos[i].tipo)
         {
         case TESORO:
             strcpy(tipo,"TESORO");

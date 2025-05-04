@@ -5,14 +5,18 @@
 #include <time.h>
 #include "jugador.h"
 #include "movimiento.h"
+/*
+LO ULTIMO QUE HICE FUE CREAR LA CLASE ENEMIGO, SE DEBE PROSEGUIR CON EL SISTEMA DE COMBATE.
+
+*/
 int main() {
     srand(time(NULL));
     struct Jugador jugador;
-    struct Mapa mapa;
+    Mapa mapa;
 
     // Inicialización
-    inicializarJugador(&jugador, "Jugador 1",&mapa);
     inicializarMapa(&mapa, 100);
+    inicializarJugador(&jugador, "Jugador 1",&mapa);
     struct Item oro;
     oro.cantidad=500;
     strcpy(oro.nombre,"Oro");
@@ -30,10 +34,12 @@ int main() {
 
         mostrarJugador(&jugador); // Mostrar información del jugador
 
+        printf("Dia Actual: %i\n",mapa.diaActual);
         // Capturar dirección del jugador
         enum Direccion direccion = capturarDireccion();
-        //moverJugador(&jugador, direccion); // Mover al jugador
+        moverJugador(&jugador, direccion); // Mover al jugador
         mapa.diaActual++;
+
         jugador.habitacionActual=mapa.habitaciones[mapa.diaActual];
 }
 }

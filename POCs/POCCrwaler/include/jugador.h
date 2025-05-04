@@ -4,7 +4,9 @@
 #include "item.h"
 #include "estadisticas.h"
 #include "mapa.h"
-
+#include "enemigo.h"
+#include "evento.h"
+struct Mapa;
 struct Jugador {
     char nombre[30];
     int vida;
@@ -15,7 +17,7 @@ struct Jugador {
     int tieneItemEquipado;
 
 };
-void inicializarJugador(struct Jugador *jugador, char nombre[],struct Mapa* mapa);
+void inicializarJugador(struct Jugador *jugador, char nombre[],Mapa *mapa);
 void mostrarJugador(struct Jugador *jugador);
 void desequiparItem(struct Jugador *jugador);
 void equiparItem(struct Jugador *jugador, char nombreItem[]);

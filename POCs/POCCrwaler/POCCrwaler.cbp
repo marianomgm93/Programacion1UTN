@@ -33,6 +33,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/enemigo.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="include/estadisticas.h" />
 		<Unit filename="include/evento.h" />
 		<Unit filename="include/habitacion.h" />
@@ -42,6 +45,10 @@
 		<Unit filename="include/movimiento.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/enemigo.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/estadisticas.c">
 			<Option compilerVar="CC" />
