@@ -2,23 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include "jugador.h"
-#include "estadisticas.h"
-#include "item.h"
-#include "mapa.h"
-#include "movimiento.h"
-#include "habitacion.h"
-#include "evento.h"
-void inicializarJugador(struct Jugador* jugador, char nombre[], Mapa* mapa)
+void inicializarJugador( Jugador* jugador, char nombre[], Mapa* mapa)//no mas mapa
 {
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
-    jugador->habitacionActual=mapa->habitaciones[mapa->diaActual];
+    jugador->habitacionActual=mapa->habitaciones[mapa->diaActual];///siempre 0
     memset(jugador->items,0,sizeof(jugador->items));
     jugador->stats=inicializarEstadisticas();
 
 }
 
-void mostrarJugador(struct Jugador *jugador)
+void mostrarJugador( Jugador *jugador)
 {
     printf("Nombre: %s\nHP: %i\nDia actual: %i\nItems:\n", jugador->nombre, jugador->vida,jugador->habitacionActual.numeroHabitacion);
 
@@ -39,7 +33,7 @@ void mostrarJugador(struct Jugador *jugador)
     }
 }
 
-void equiparItem(struct Jugador *jugador, char nombreItem[])
+void equiparItem( Jugador *jugador, char nombreItem[])
 {
     int itemSocket = buscarItem(jugador, nombreItem);
 
@@ -55,7 +49,7 @@ void equiparItem(struct Jugador *jugador, char nombreItem[])
     }
 }
 
-void desequiparItem(struct Jugador *jugador)
+void desequiparItem( Jugador *jugador)
 {
     if (jugador->tieneItemEquipado)
     {
@@ -65,7 +59,7 @@ void desequiparItem(struct Jugador *jugador)
         printf("Has desequipado el ítem.\n");
     }
 }
-void mostrarInventario(struct Jugador jugador)
+void mostrarInventario( Jugador jugador)
 {
 
     for (int i = 0; i < DIM; i++)

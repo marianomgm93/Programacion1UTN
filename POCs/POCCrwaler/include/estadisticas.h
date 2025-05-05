@@ -1,15 +1,15 @@
 #ifndef ESTADISTICAS_H_INCLUDED
 #define ESTADISTICAS_H_INCLUDED
-struct Estadisticas{
+typedef struct {
     int ataque;
     int defensa;
     int velocidad;
     int suerte;
     int inteligencia;
 
-};
+}Estadisticas;
 
-struct Estadisticas inicializarEstadisticas();
+Estadisticas inicializarEstadisticas();
 
 
 #endif // ESTADISTICAS_H_INCLUDED

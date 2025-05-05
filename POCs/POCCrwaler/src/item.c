@@ -2,7 +2,7 @@
 #include <string.h>
 #include "item.h"
 
-int buscarItem(struct Item items[], char nombreItem[]) {
+int buscarItem( Item items[], char nombreItem[]) {
     for (int i = 0; i < DIM; i++) {
         if (stricmp(items[i].nombre, nombreItem) == 0) {
             return i;
@@ -11,7 +11,7 @@ int buscarItem(struct Item items[], char nombreItem[]) {
     return -1;
 }
 
-int eliminarItem(struct Item items[], char nombreItem[]) {
+int eliminarItem( Item items[], char nombreItem[]) {
     int i = buscarItem(items, nombreItem);
     if (i != -1) {
         items[i].cantidad = 0;
@@ -21,7 +21,7 @@ int eliminarItem(struct Item items[], char nombreItem[]) {
     return 0;
 }
 
-void usarItem(struct Item items[], char nombreItem[]) {
+void usarItem( Item items[], char nombreItem[]) {
     int i = buscarItem(items, nombreItem);
     if (i != -1) {
         items[i].cantidad--;
@@ -34,7 +34,7 @@ void usarItem(struct Item items[], char nombreItem[]) {
     }
 }
 
-void agregarItem(struct Item items[], char nombreItem[], int cantidad) {
+void agregarItem( Item items[], char nombreItem[], int cantidad) {
     int i = buscarItem(items, nombreItem);
     if (i != -1) {
         items[i].cantidad += cantidad;

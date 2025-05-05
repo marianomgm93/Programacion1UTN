@@ -2,43 +2,51 @@
 #define EVENTO_H_INCLUDED
 #include "item.h"
 #include "enemigo.h"
-#include "mapa.h"
 #include "jugador.h"
-typedef enum{
+typedef enum
+{
     TESORO,
     COMBATE,
     MISION,
     TIENDA
-}TipoEvento;
-struct TesoroData{
+} TipoEvento;
+typedef struct
+{
     int cantidadOro;
     int rarezaObjeto;
-};
-struct CombateData{
+} TesoroData;
+typedef struct
+{
     Enemigo enemigo;
-};
-struct MisionData{
+} CombateData;
+
+typedef struct
+{
     char idObjeto[DIM];
 
-};
-struct TiendaData{
-    struct Item itemsEnVenta[5];
+} MisionData;
+typedef struct
+{
+    Item itemsEnVenta[5];
     int puedeDescansar;
 
-};
-union DatosEvento{
-    struct TesoroData tesoro;
-    struct CombateData combate;
-    struct MisionData mision;
-    struct TiendaData tienda;
+} TiendaData;
+
+union DatosEvento
+{
+    TesoroData tesoro;
+    CombateData combate;
+    MisionData mision;
+    TiendaData tienda;
 };
 
-typedef struct{
+typedef struct
+{
     TipoEvento tipo;
     int nivelEspecial;//booleano si, no;
     union DatosEvento datos;
-}Evento;
+} Evento;
 
 void inicializarEvento(Evento* evento,int nivel);
-void seleccionarEvento(Evento evento, struct Jugador* jugador);
+void seleccionarEvento(Evento evento,  Jugador *jugador);
 #endif // EVENTO_H_INCLUDED

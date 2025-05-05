@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include "estadisticas.h"
 
-struct Estadisticas inicializarEstadisticas(){
-    struct Estadisticas stats;
+Estadisticas inicializarEstadisticas()
+{
+    Estadisticas stats;
 
     stats.ataque=rand()%20+21;
     stats.defensa=rand()%20+21;

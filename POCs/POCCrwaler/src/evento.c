@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "evento.h"
-#include "jugador.h"
-#include "enemigo.h"
 void inicializarEvento(Evento* evento,int nivel)
 {
     evento->tipo=rand()%4;
@@ -15,26 +13,27 @@ void inicializarEvento(Evento* evento,int nivel)
         evento->datos.tesoro.rarezaObjeto=rand()%4;
         break;
     case COMBATE:
-        //evento->datos.combate.enemigo=constructorEnemigo(nivel,rand()%4);
+        evento->datos.combate.enemigo=constructorEnemigo(nivel,rand()%4);
         break;
     case MISION:
-        //evento->datos.mision.idObjeto="";
+        strcpy(evento->datos.mision.idObjeto,"");
         break;
     case TIENDA:
-        //evento->datos.tienda.itemsEnVenta
+        evento->datos.tienda.itemsEnVenta;
         evento->datos.tienda.puedeDescansar=1;
         break;
     }
 }
-void seleccionarEvento(Evento evento, struct Jugador* jugador)
-{
+void seleccionarEvento(Evento evento,  Jugador* jugador)
+{int dmg;
     switch(evento.tipo)
     {
     case TESORO:
         jugador->items[0].cantidad+=evento.datos.tesoro.cantidadOro;
         break;
     case COMBATE:
-        int dmg = jugador->stats.defensa - evento.datos.combate.enemigo.stats.ataque;
+
+        dmg = (jugador->stats.defensa) - (evento.datos.combate.enemigo.stats.ataque);
         if (dmg < 0)
             jugador->vida += dmg;
         else
@@ -42,6 +41,7 @@ void seleccionarEvento(Evento evento, struct Jugador* jugador)
         break;
     case MISION:
         //evento->datos.mision.idObjeto="";
+        strcpy(evento->datos.mision.idObjeto,"");
         break;
     case TIENDA:
         //evento->datos.tienda.itemsEnVenta

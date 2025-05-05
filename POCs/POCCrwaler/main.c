@@ -11,17 +11,16 @@ LO ULTIMO QUE HICE FUE CREAR LA CLASE ENEMIGO, SE DEBE PROSEGUIR CON EL SISTEMA 
 */
 int main() {
     srand(time(NULL));
-    struct Jugador jugador;
+    Jugador jugador;
     Mapa mapa;
 
     // Inicialización
     inicializarMapa(&mapa, 100);
     inicializarJugador(&jugador, "Jugador 1",&mapa);
-    struct Item oro;
+     Item oro;
     oro.cantidad=500;
     strcpy(oro.nombre,"Oro");
     jugador.items[0]=oro;
-
 
     // Mostrar mapa con el jugador
     //dibujarMapa(&jugador, &mapa);

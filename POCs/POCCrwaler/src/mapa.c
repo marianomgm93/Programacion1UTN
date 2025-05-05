@@ -2,7 +2,6 @@
 #include "mapa.h"
 #define VENTANA_ANCHO 20
 #define VENTANA_ALTO 10
-#include "habitacion.h"
 
 void inicializarMapa(Mapa* mapa,int dias)
 {
@@ -15,7 +14,7 @@ void inicializarMapa(Mapa* mapa,int dias)
     }
 }
 
-void dibujarMapa(struct Jugador* jugador,Mapa mapa)
+void dibujarMapa( Jugador* jugador,Mapa mapa)
 {
     char tipo[DIM];
 

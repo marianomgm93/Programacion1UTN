@@ -142,3 +142,78 @@
 	<stdio.h>
 	"enemigo.h"
 
+1746461802 source:d:\marian\pocs\poccrwaler\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mapa.h"
+	<time.h>
+	"jugador.h"
+	"movimiento.h"
+
+1746463309 d:\marian\pocs\poccrwaler\include\mapa.h
+	"jugador.h"
+	"habitacion.h"
+
+1746463605 d:\marian\pocs\poccrwaler\include\jugador.h
+	"habitacion.h"
+	"mapa.h"
+
+1746462615 d:\marian\pocs\poccrwaler\include\habitacion.h
+	"evento.h"
+
+1746463340 d:\marian\pocs\poccrwaler\include\evento.h
+	"item.h"
+	"enemigo.h"
+	"mapa.h"
+	"jugador.h"
+
+1746463605 d:\marian\pocs\poccrwaler\include\item.h
+
+1746464147 d:\marian\pocs\poccrwaler\include\enemigo.h
+	<string.h>
+	"estadisticas.h"
+
+1746464136 d:\marian\pocs\poccrwaler\include\estadisticas.h
+
+1746461767 d:\marian\pocs\poccrwaler\include\movimiento.h
+	"mapa.h"
+	"jugador.h"
+	"conio.h"
+
+1746464161 source:d:\marian\pocs\poccrwaler\src\estadisticas.c
+	<stdio.h>
+	"estadisticas.h"
+
+1746463923 source:d:\marian\pocs\poccrwaler\src\item.c
+	<stdio.h>
+	<string.h>
+	"item.h"
+
+1746461802 source:d:\marian\pocs\poccrwaler\src\jugador.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jugador.h"
+	"estadisticas.h"
+	"item.h"
+	"mapa.h"
+	"movimiento.h"
+	"habitacion.h"
+	"evento.h"
+
+1746461802 source:d:\marian\pocs\poccrwaler\src\mapa.c
+	<stdio.h>
+	"mapa.h"
+	"habitacion.h"
+
+1746461767 source:d:\marian\pocs\poccrwaler\src\movimiento.c
+	<stdio.h>
+	"movimiento.h"
+	"evento.h"
+
+1746461970 source:d:\marian\pocs\poccrwaler\src\enemigo.c
+	<stdlib.h>
+	<stdio.h>
+	"enemigo.h"
+

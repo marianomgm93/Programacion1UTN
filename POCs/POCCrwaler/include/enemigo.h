@@ -13,7 +13,7 @@ typedef struct{
     int nivel;
     int vida;
     TipoEnemigo tipo;
-    struct Estadisticas stats;
+    Estadisticas stats;
 }Enemigo;
 void constructorEnemigo(int nivel, TipoEnemigo tipo);
 

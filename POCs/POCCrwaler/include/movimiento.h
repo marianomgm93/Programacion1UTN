@@ -11,6 +11,6 @@ enum Direccion {
     NINGUNA
 };
 enum Direccion capturarDireccion();
-void moverJugador(struct Jugador *jugador, enum Direccion direccion);
+void moverJugador( Jugador *jugador, enum Direccion direccion);
 
 #endif // MOVIMIENTO_H_INCLUDED

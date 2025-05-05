@@ -1,6 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "movimiento.h"
-#include "evento.h"
 
 enum Direccion capturarDireccion() {
     char tecla = getch();
@@ -13,7 +13,7 @@ enum Direccion capturarDireccion() {
     }
 }
 
-void moverJugador(struct Jugador* jugador, enum Direccion direccion){
+void moverJugador( Jugador* jugador, enum Direccion direccion){
     seleccionarEvento(jugador->habitacionActual.eventos[direccion-1],jugador);
 
 }
