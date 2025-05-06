@@ -1,20 +1,20 @@
 #ifndef JUGADOR_H_INCLUDED
 #define JUGADOR_H_INCLUDED
-#include "mapa.h"
 #include "estadisticas.h"
+#include "item.h"
 #define INVENTARIO 30
 typedef struct
 {
     char nombre[30];
     int vida;
-    Habitacion habitacionActual;
+    //Habitacion habitacionActual;
     Item items[INVENTARIO];
     Estadisticas stats;
     Item itemEquipado;
     int tieneItemEquipado;
 
 } Jugador;
-void inicializarJugador( Jugador *jugador, char nombre[],Mapa *mapa);
+void inicializarJugador( Jugador *jugador, char nombre[]);
 void mostrarJugador( Jugador *jugador);
 void desequiparItem( Jugador *jugador);
 void equiparItem( Jugador *jugador, char nombreItem[]);

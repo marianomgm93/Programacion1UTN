@@ -15,7 +15,7 @@ typedef struct{
     TipoEnemigo tipo;
     Estadisticas stats;
 }Enemigo;
-void constructorEnemigo(int nivel, TipoEnemigo tipo);
+Enemigo constructorEnemigo(int nivel, TipoEnemigo tipo);
 
 
 #endif // ENEMIGO_H_INCLUDED

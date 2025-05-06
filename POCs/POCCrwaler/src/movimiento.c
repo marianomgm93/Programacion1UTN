@@ -2,19 +2,33 @@
 #include <stdlib.h>
 #include "movimiento.h"
 
-enum Direccion capturarDireccion() {
+enum Direccion capturarDireccion()
+{
     char tecla = getch();
-    switch (tecla) {
-        case '1': return 1;
-        case '2': return 2;
-        case '3': return 3;
-        case '4': return 4;
-        default: return NINGUNA;
+    int aux;
+    switch (tecla)
+    {
+    case '1':
+        aux=1;
+        break;
+    case '2':
+        aux=2;
+        break;
+    case '3':
+        aux=3;
+        break;
+    case '4':
+        aux=4;
+        break;
+    default:
+        break;
+
     }
 }
 
-void moverJugador( Jugador* jugador, enum Direccion direccion){
-    seleccionarEvento(jugador->habitacionActual.eventos[direccion-1],jugador);
+void moverJugador(Mapa mapa,enum Direccion direccion, Jugador* jugador)
+{
+    seleccionarEvento(mapa.habitaciones[mapa.diaActual].eventos[direccion-1],jugador);
 
 }
 

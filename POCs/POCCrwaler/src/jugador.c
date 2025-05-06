@@ -2,11 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "jugador.h"
-void inicializarJugador( Jugador* jugador, char nombre[], Mapa* mapa)//no mas mapa
+void inicializarJugador( Jugador* jugador, char nombre[])//no mas mapa
 {
     strcpy(jugador->nombre,nombre);
     jugador->vida=rand()%11+10;
-    jugador->habitacionActual=mapa->habitaciones[mapa->diaActual];///siempre 0
     memset(jugador->items,0,sizeof(jugador->items));
     jugador->stats=inicializarEstadisticas();
 
@@ -14,7 +13,7 @@ void inicializarJugador( Jugador* jugador, char nombre[], Mapa* mapa)//no mas ma
 
 void mostrarJugador( Jugador *jugador)
 {
-    printf("Nombre: %s\nHP: %i\nDia actual: %i\nItems:\n", jugador->nombre, jugador->vida,jugador->habitacionActual.numeroHabitacion);
+    printf("Nombre: %s\nHP: %i\nItems:\n", jugador->nombre, jugador->vida);
 
     mostrarInventario(*jugador);
     printf("Estadisticas:\n");

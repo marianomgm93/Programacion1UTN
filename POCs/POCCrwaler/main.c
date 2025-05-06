@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mapa.h"
 #include <time.h>
-#include "jugador.h"
 #include "movimiento.h"
 /*
 LO ULTIMO QUE HICE FUE CREAR LA CLASE ENEMIGO, SE DEBE PROSEGUIR CON EL SISTEMA DE COMBATE.
@@ -16,7 +14,7 @@ int main() {
 
     // Inicialización
     inicializarMapa(&mapa, 100);
-    inicializarJugador(&jugador, "Jugador 1",&mapa);
+    inicializarJugador(&jugador, "Jugador 1");
      Item oro;
     oro.cantidad=500;
     strcpy(oro.nombre,"Oro");
@@ -36,9 +34,9 @@ int main() {
         printf("Dia Actual: %i\n",mapa.diaActual);
         // Capturar dirección del jugador
         enum Direccion direccion = capturarDireccion();
-        moverJugador(&jugador, direccion); // Mover al jugador
+        moverJugador(mapa, direccion,&jugador); // Mover al jugador
         mapa.diaActual++;
 
-        jugador.habitacionActual=mapa.habitaciones[mapa.diaActual];
+
 }
 }

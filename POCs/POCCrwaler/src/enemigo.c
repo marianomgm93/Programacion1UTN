@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "enemigo.h"
 #define VIDA_BASE 10
-void constructorEnemigo(int nivel, TipoEnemigo tipo)
+Enemigo constructorEnemigo(int nivel, TipoEnemigo tipo)
 {
     Enemigo enemigo;
     enemigo.nivel=nivel;
@@ -22,5 +22,5 @@ void constructorEnemigo(int nivel, TipoEnemigo tipo)
         enemigo.vida=rand()%11*nivel+VIDA_BASE;
         break;
     }
-
+    return enemigo;
 }

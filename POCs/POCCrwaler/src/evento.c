@@ -40,8 +40,6 @@ void seleccionarEvento(Evento evento,  Jugador* jugador)
             printf("MISS\n");
         break;
     case MISION:
-        //evento->datos.mision.idObjeto="";
-        strcpy(evento->datos.mision.idObjeto,"");
         break;
     case TIENDA:
         //evento->datos.tienda.itemsEnVenta
