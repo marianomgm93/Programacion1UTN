@@ -1,7 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "enemigo.h"
+
 #define VIDA_BASE 10
+
 Enemigo constructorEnemigo(int nivel, TipoEnemigo tipo)
 {
     Enemigo enemigo;

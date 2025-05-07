@@ -10,7 +10,7 @@ typedef struct {
 } Mapa;
 
 void inicializarMapa(Mapa *mapa,int diasTotales);
-void dibujarMapa( Jugador *jugador,Mapa mapa);
+void dibujarMapa(Mapa mapa);
 
 
 #endif // MAPA_H_INCLUDED

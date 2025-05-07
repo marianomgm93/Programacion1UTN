@@ -14,7 +14,7 @@ void inicializarMapa(Mapa* mapa,int dias)
     }
 }
 
-void dibujarMapa( Jugador* jugador,Mapa mapa)
+void dibujarMapa(Mapa mapa)
 {
     char tipo[DIM];
 
