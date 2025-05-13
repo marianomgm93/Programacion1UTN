@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1747154320 source:d:\mariano\archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1747070406 source:d:\mariano\archivos\pila.c
+	"pila.h"
+
+1747070406 d:\mariano\archivos\pila.h
+	<stdio.h>
+	<malloc.h>
+
