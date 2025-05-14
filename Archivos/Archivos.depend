@@ -10,3 +10,15 @@
 	<stdio.h>
 	<malloc.h>
 
+1747249755 source:c:\repositoriomariano\archivos\pila.c
+	"pila.h"
+
+1747249755 c:\repositoriomariano\archivos\pila.h
+	<stdio.h>
+	<malloc.h>
+
+1747254082 source:c:\repositoriomariano\archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pila.h"
+

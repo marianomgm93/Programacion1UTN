@@ -173,13 +173,17 @@ void nuevoAlumno(char nombreArchivo[])
 /**
 *7_Crear una función que pase a una pila los números de legajo de los alumnos mayores de edad.
 */
-void apilarMayores(Pila* p,char nombreArchivo[]){
+void apilarMayores(Pila* p,char nombreArchivo[])
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
-    if(buffer){
-        while(!feof(buffer)){
+    if(buffer)
+    {
+        while(!feof(buffer))
+        {
             fread(&alumno,sizeof(alumno),1,buffer);
-            if(!feof(buffer)&&alumno.edad>18){
+            if(!feof(buffer)&&alumno.edad>18)
+            {
                 apilar(p,alumno.legajo);
             }
         }
@@ -190,18 +194,22 @@ void apilarMayores(Pila* p,char nombreArchivo[]){
 *8_Dado un archivo de alumnos, hacer una función
 *que cuente la cantidad de alumnos mayores a edad específica que se envía por parámetro.
 */
-int contarMayores(char nombreArchivo[],int edadEspecifica){
+int contarMayores(char nombreArchivo[],int edadEspecifica)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
     int contador=0;
-    if(buffer){
-        while(!feof(buffer)){
+    if(buffer)
+    {
+        while(!feof(buffer))
+        {
             fread(&alumno,sizeof(alumno),1,buffer);
-            if(!feof(buffer)&&alumno.edad>edadEspecifica){
+            if(!feof(buffer)&&alumno.edad>edadEspecifica)
+            {
                 contador++;
             }
         }
-    fclose(buffer);
+        fclose(buffer);
     }
     return contador;
 }
@@ -210,14 +218,18 @@ int contarMayores(char nombreArchivo[],int edadEspecifica){
 *rango de edades
 *específico (por ejemplo, entre 17 y 25 años). Dicho rango debe recibirse por parámetro. Modularizar
 */
-void mostarRango(char nombreArchivo[],int menor,int mayor){
+void mostarRango(char nombreArchivo[],int menor,int mayor)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
-    if(buffer){
+    if(buffer)
+    {
         printf("Alumnos entre %i y %i anios:\n",menor,mayor);
-        while(!feof(buffer)){
+        while(!feof(buffer))
+        {
             fread(&alumno,sizeof(alumno),1,buffer);
-            if(!feof(buffer) && (alumno.edad>menor && alumno.edad<mayor)){
+            if(!feof(buffer) && (alumno.edad>menor && alumno.edad<mayor))
+            {
                 printf("%s\n",alumno.nombreYapellido);
             }
         }
@@ -227,15 +239,19 @@ void mostarRango(char nombreArchivo[],int menor,int mayor){
 /**
 *10_Dado un archivo de alumnos, mostrar los datos del alumno de mayor edad. Modularizar.
 */
-void mostrarMayor(char nombreArchivo[]){
+void mostrarMayor(char nombreArchivo[])
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
     stAlumno alumnoMayor;
-    if(buffer){
+    if(buffer)
+    {
         fread(&alumnoMayor,sizeof(alumno),1,buffer);
-        while(!feof(buffer)){
+        while(!feof(buffer))
+        {
             fread(&alumno,sizeof(alumno),1,buffer);
-            if(!feof(buffer) && (alumnoMayor.edad<alumno.edad) ){
+            if(!feof(buffer) && (alumnoMayor.edad<alumno.edad) )
+            {
                 alumnoMayor=alumno;
             }
         }
@@ -247,14 +263,18 @@ void mostrarMayor(char nombreArchivo[]){
 *11. Crear una función que retorne la cantidad de alumnos que cursan un determinado año. El
 *año buscado se pasa por parámetro.
 */
-int alumnosEnAnio(char nombreArchivo[],int anioCurso){
+int alumnosEnAnio(char nombreArchivo[],int anioCurso)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
     int contador=0;
-    if(buffer){
-        while(!feof(buffer)){
-                fread(&alumno, sizeof(alumno), 1,buffer);
-            if(!feof(buffer) && alumno.anio==anioCurso){
+    if(buffer)
+    {
+        while(!feof(buffer))
+        {
+            fread(&alumno, sizeof(alumno), 1,buffer);
+            if(!feof(buffer) && alumno.anio==anioCurso)
+            {
                 contador++;
             }
         }
@@ -267,21 +287,27 @@ int alumnosEnAnio(char nombreArchivo[],int anioCurso){
 *alumnos, filtrando los estudiantes de un año en particular.
 */
 
-void archivarArreglo(char nombreArchivo[], stAlumno arr[],int validos){
+void archivarArreglo(char nombreArchivo[], stAlumno arr[],int validos)
+{
     FILE* buffer=fopen(nombreArchivo,"wb");
-    if(buffer){
+    if(buffer)
+    {
         fwrite(arr,sizeof(stAlumno),validos,buffer);
         fclose(buffer);
     }
 }
 
-void filtrarPorAnio(char nombreArchivo[], int anioFiltro, stAlumno arr[], int* validos){
+void filtrarPorAnio(char nombreArchivo[], int anioFiltro, stAlumno arr[], int* validos)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     stAlumno alumno;
-    if(buffer){
-        while(!feof(buffer)){
+    if(buffer)
+    {
+        while(!feof(buffer))
+        {
             fread(&alumno,sizeof(stAlumno),1,buffer);
-            if(!feof(buffer) && anioFiltro==alumno.anio){
+            if(!feof(buffer) && anioFiltro==alumno.anio)
+            {
                 arr[*validos]=alumno;
                 (*validos)++;
             }
@@ -294,11 +320,12 @@ void filtrarPorAnio(char nombreArchivo[], int anioFiltro, stAlumno arr[], int* v
 *ftell. Puede pensar la función para uso genérico, que sirva para averiguar la cantidad de
 *registros de cualquier archivo.
 */
-int cantidadAlumnos(char nombreArchivo[]){
+int cantidadAlumnos(char nombreArchivo[])
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
-    stAlumno alumno;
     int total=0;
-    if(buffer){
+    if(buffer)
+    {
         fseek(buffer,0,SEEK_END);
         total=ftell(buffer)/sizeof(stAlumno);
         fclose(buffer);
@@ -311,26 +338,34 @@ int cantidadAlumnos(char nombreArchivo[]){
 *Controlar no sobrepasar los límites del archivo.
 */
 
-void mostrarRegistro(char nombreArchivo[],int numeroRegistro){
+void mostrarRegistro(char nombreArchivo[],int numeroRegistro)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     int totalRegistros;
     stAlumno alumno;
-    if(numeroRegistro<10 && numeroRegistro>=0){
+    if(numeroRegistro<10 && numeroRegistro>=0)
+    {
 
-    if(buffer){
-        fseek(buffer,0,SEEK_END);
-        totalRegistros=ftell(buffer)/sizeof(stAlumno);
-        if(numeroRegistro<=totalRegistros){
-            fseek(buffer,numeroRegistro*sizeof(stAlumno),SEEK_SET);
-            fread(&alumno,sizeof(stAlumno),1,buffer);
-            alumnoToString(alumno);
-        }else{
-            printf("El numero de registro no existe en el archivo\n");
+        if(buffer)
+        {
+            fseek(buffer,0,SEEK_END);
+            totalRegistros=ftell(buffer)/sizeof(stAlumno);
+            if(numeroRegistro<=totalRegistros)
+            {
+                fseek(buffer,numeroRegistro*sizeof(stAlumno),SEEK_SET);
+                fread(&alumno,sizeof(stAlumno),1,buffer);
+                alumnoToString(alumno);
+            }
+            else
+            {
+                printf("El numero de registro no existe en el archivo\n");
+            }
+
+            fclose(buffer);
         }
-
-        fclose(buffer);
     }
-    }else{
+    else
+    {
         printf("El numero ingresado debe estar entre 0 y 9\n");
     }
 }
@@ -341,19 +376,23 @@ void mostrarRegistro(char nombreArchivo[],int numeroRegistro){
 *sobreescribir el registro existente en el archivo.
 */
 
-int obtenerRegistro(char nombreArchivo[],int numeroRegistro,stAlumno* alumno){
+int obtenerRegistro(char nombreArchivo[],int numeroRegistro,stAlumno* alumno)
+{
     FILE* buffer=fopen(nombreArchivo,"rb");
     int totalRegistros,resultado;
 
-    if(buffer){
+    if(buffer)
+    {
         fseek(buffer,0,SEEK_END);
         totalRegistros=ftell(buffer)/sizeof(stAlumno);
-        if(numeroRegistro<=totalRegistros){
+        if(numeroRegistro<totalRegistros)
+        {
             fseek(buffer,numeroRegistro*sizeof(stAlumno),SEEK_SET);
-            fread(&alumno,sizeof(stAlumno),1,buffer);
-            alumnoToString(alumno);
+            fread(alumno,sizeof(stAlumno),1,buffer);
             resultado=1;//devuelve 1 si se encuentra el registro;
-        }else{
+        }
+        else
+        {
             printf("El numero de registro no existe en el archivo\n");
             resultado=0;//devuelve 0 si no se encuentra el registro
         }
@@ -362,43 +401,85 @@ int obtenerRegistro(char nombreArchivo[],int numeroRegistro,stAlumno* alumno){
     }
     return resultado;
 }
-void modificarRegistro(char nombreArchivo[]){
+stAlumno menuModificarAlumno (stAlumno alumno)
+{
+    int option;
+    int status=IN;
+
+    while(status)
+    {
+        alumnoToString(alumno);
+        printf("0\tAtras\n1\tModificar legajo\n2\tModificar nombre\n3\tModificar anio\n4\tModificar edad\n");
+        scanf("%i",&option);
+
+        switch(option)
+        {
+        case 0:
+            status=OUT;
+            break;
+        case 1:
+            printf("Ingrese nuevo legajo:\n");
+            scanf("%i",&(alumno.legajo));
+            break;
+        case 2:
+            printf("Ingrese nuevo nombre:\n");
+            fflush(stdin);
+            gets(&(alumno.nombreYapellido));
+            break;
+        case 3:
+            printf("Ingrese nuevo anio:\n");
+            scanf("%i",&(alumno.anio));
+            break;
+        case 4:
+            printf("Ingrese nueva edad:\n");
+            scanf("%i",&(alumno.edad));
+            break;
+        default:
+            printf("La opcion ingresada no es valida\n");
+            break;
+        }
+    }
+}
+void guardarEn(char nombreArchivo[],int posicion,stAlumno alumno)
+{
     FILE* buffer=fopen(nombreArchivo,"r+b");
+    if(buffer)
+    {
+        fseek(buffer,posicion,SEEK_SET);
+        fwrite(&alumno,sizeof(stAlumno),1,buffer);
+        fclose(buffer);
+    }
+
+}
+void modificarRegistro(char nombreArchivo[])
+{
     int status=IN,option;
     stAlumno alumno;
     int numeroRegistro;
-    if(buffer){
-        while(status){
-            printf("1\tBuscar registro\n0\tSalir\n")
-            scanf("%i",&option);
-            switch(option){
-            case 0:
-                status=OUT;
-                break;
-            case 1:
-                printf("Ingrese el registro que desee buscar\n");
-                scanf("%i",&numeroRegistro);
-                if(obtenerRegistro(nombreArchivo,numeroRegistro,&alumno)){
-                    print("1\tModificar legajo\n2\tModificar nombre\n3\tModificar anio\n4\tModificar edad\n");
-                    scanf("%i",&option);
-                    switch(option){
-                case 1:
-                    printf("Ingrese nuevo legajo:\n");
-                    scanf("%i",alumno.legajo);
-                    break;
-                case 2:
-                    printf("Ingrese nuevo nombre:\n");
-                    gets(alumno.nombreYapellido);
-                    break;
-                case 3:
 
-
-                    }
-                }
+    while(status)
+    {
+        printf("1\tBuscar registro\n0\tSalir\n");
+        scanf("%i",&option);
+        switch(option)
+        {
+        case 0:
+            status=OUT;
+            break;
+        case 1:
+            printf("Ingrese el registro que desee buscar\n");
+            scanf("%i",&numeroRegistro);
+            if(obtenerRegistro(nombreArchivo,numeroRegistro,&alumno))//comprobacion y consumo alumno
+            {
+                alumno=menuModificarAlumno(alumno);//modificacion del alumno
+                guardarEn(nombreArchivo,numeroRegistro,alumno);//update
             }
+            break;
+        default:
+            printf("Opcion incorrecta\n");
+            break;
         }
     }
-
 }
 
 int main()
@@ -431,6 +512,6 @@ int main()
     printf("Hay %i alumnos en total",cantidadAlumnos(alumnos));
 
     mostrarRegistro(alumnos,3);*/
-
+    modificarRegistro(alumnos);
     return 0;
 }
