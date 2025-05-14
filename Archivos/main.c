@@ -243,11 +243,172 @@ void mostrarMayor(char nombreArchivo[]){
     }
     alumnoToString(alumnoMayor);
 }
+/**
+*11. Crear una función que retorne la cantidad de alumnos que cursan un determinado año. El
+*año buscado se pasa por parámetro.
+*/
+int alumnosEnAnio(char nombreArchivo[],int anioCurso){
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    int contador=0;
+    if(buffer){
+        while(!feof(buffer)){
+                fread(&alumno, sizeof(alumno), 1,buffer);
+            if(!feof(buffer) && alumno.anio==anioCurso){
+                contador++;
+            }
+        }
+    }
+    return contador;
+}
+/**
+*12_Crear una función que reciba como parámetro un arreglo de tipo alumno y lo copie en el
+*archivo. Asimismo, realice otra función que pase los elementos del archivo a un arreglo de
+*alumnos, filtrando los estudiantes de un año en particular.
+*/
+
+void archivarArreglo(char nombreArchivo[], stAlumno arr[],int validos){
+    FILE* buffer=fopen(nombreArchivo,"wb");
+    if(buffer){
+        fwrite(arr,sizeof(stAlumno),validos,buffer);
+        fclose(buffer);
+    }
+}
+
+void filtrarPorAnio(char nombreArchivo[], int anioFiltro, stAlumno arr[], int* validos){
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    if(buffer){
+        while(!feof(buffer)){
+            fread(&alumno,sizeof(stAlumno),1,buffer);
+            if(!feof(buffer) && anioFiltro==alumno.anio){
+                arr[*validos]=alumno;
+                (*validos)++;
+            }
+        }
+        fclose(buffer);
+    }
+}
+/**
+*13. Crear una función que retorne la cantidad de registros que tiene el archivo. Usar fseek y
+*ftell. Puede pensar la función para uso genérico, que sirva para averiguar la cantidad de
+*registros de cualquier archivo.
+*/
+int cantidadAlumnos(char nombreArchivo[]){
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    int total=0;
+    if(buffer){
+        fseek(buffer,0,SEEK_END);
+        total=ftell(buffer)/sizeof(stAlumno);
+        fclose(buffer);
+    }
+    return total;
+}
+/**
+*14. Dado un archivo de alumnos, que tenga al menos 10 registros, hacer una función que
+*muestre el contenido de un registro, cuyo número (entre 0 y 9) se pase por parámetro.
+*Controlar no sobrepasar los límites del archivo.
+*/
+
+void mostrarRegistro(char nombreArchivo[],int numeroRegistro){
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    int totalRegistros;
+    stAlumno alumno;
+    if(numeroRegistro<10 && numeroRegistro>=0){
+
+    if(buffer){
+        fseek(buffer,0,SEEK_END);
+        totalRegistros=ftell(buffer)/sizeof(stAlumno);
+        if(numeroRegistro<=totalRegistros){
+            fseek(buffer,numeroRegistro*sizeof(stAlumno),SEEK_SET);
+            fread(&alumno,sizeof(stAlumno),1,buffer);
+            alumnoToString(alumno);
+        }else{
+            printf("El numero de registro no existe en el archivo\n");
+        }
+
+        fclose(buffer);
+    }
+    }else{
+        printf("El numero ingresado debe estar entre 0 y 9\n");
+    }
+}
+
+/**
+*15_Realice una (o varias) funciones que permitan modificar un registro existente en el archivo
+*de alumnos. La misma debe permitir modificar uno o todos los campos de la estructura y
+*sobreescribir el registro existente en el archivo.
+*/
+
+int obtenerRegistro(char nombreArchivo[],int numeroRegistro,stAlumno* alumno){
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    int totalRegistros,resultado;
+
+    if(buffer){
+        fseek(buffer,0,SEEK_END);
+        totalRegistros=ftell(buffer)/sizeof(stAlumno);
+        if(numeroRegistro<=totalRegistros){
+            fseek(buffer,numeroRegistro*sizeof(stAlumno),SEEK_SET);
+            fread(&alumno,sizeof(stAlumno),1,buffer);
+            alumnoToString(alumno);
+            resultado=1;//devuelve 1 si se encuentra el registro;
+        }else{
+            printf("El numero de registro no existe en el archivo\n");
+            resultado=0;//devuelve 0 si no se encuentra el registro
+        }
+
+        fclose(buffer);
+    }
+    return resultado;
+}
+void modificarRegistro(char nombreArchivo[]){
+    FILE* buffer=fopen(nombreArchivo,"r+b");
+    int status=IN,option;
+    stAlumno alumno;
+    int numeroRegistro;
+    if(buffer){
+        while(status){
+            printf("1\tBuscar registro\n0\tSalir\n")
+            scanf("%i",&option);
+            switch(option){
+            case 0:
+                status=OUT;
+                break;
+            case 1:
+                printf("Ingrese el registro que desee buscar\n");
+                scanf("%i",&numeroRegistro);
+                if(obtenerRegistro(nombreArchivo,numeroRegistro,&alumno)){
+                    print("1\tModificar legajo\n2\tModificar nombre\n3\tModificar anio\n4\tModificar edad\n");
+                    scanf("%i",&option);
+                    switch(option){
+                case 1:
+                    printf("Ingrese nuevo legajo:\n");
+                    scanf("%i",alumno.legajo);
+                    break;
+                case 2:
+                    printf("Ingrese nuevo nombre:\n");
+                    gets(alumno.nombreYapellido);
+                    break;
+                case 3:
+
+
+                    }
+                }
+            }
+        }
+    }
+
+}
+
 int main()
 {
     char archivo[]="documento";
+    char alumnosAnioUno[]="alumnosPrimerAnio";
     //menuArchivos(archivo);
     char alumnos[]="alumnos";
+    stAlumno arregloAlumnos[30];
+    int validosAlumnos=0;
     Pila alumnosMayores;
     inicpila(&alumnosMayores);
     /*cargarAlumnos(alumnos);
@@ -259,7 +420,17 @@ int main()
 
     printf("Alumnos mayores de edad: %i\n",contarMayores(alumnos,18));
     mostarRango(alumnos,18,30);
-    */
+
     mostrarMayor(alumnos);
+    printf("Hay %i alumnos cursando el anio 1\n", alumnosEnAnio(alumnos,1));
+    filtrarPorAnio(alumnos,1,arregloAlumnos,&validosAlumnos);
+
+    archivarArreglo(alumnosAnioUno,arregloAlumnos,validosAlumnos);
+    mostrarAlumnos(alumnosAnioUno);
+
+    printf("Hay %i alumnos en total",cantidadAlumnos(alumnos));
+
+    mostrarRegistro(alumnos,3);*/
+
     return 0;
 }
