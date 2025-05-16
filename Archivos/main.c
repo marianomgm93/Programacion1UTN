@@ -323,9 +323,10 @@ void filtrarPorAnio(char nombreArchivo[], int anioFiltro, stAlumno arr[], int* v
 int cantidadAlumnos(char nombreArchivo[])
 {
     FILE* buffer=fopen(nombreArchivo,"rb");
-    int total=0;
+    int total=-1;
     if(buffer)
     {
+        total=0;
         fseek(buffer,0,SEEK_END);
         total=ftell(buffer)/sizeof(stAlumno);
         fclose(buffer);
@@ -401,14 +402,13 @@ int obtenerRegistro(char nombreArchivo[],int numeroRegistro,stAlumno* alumno)
     }
     return resultado;
 }
-stAlumno menuModificarAlumno (stAlumno alumno)
+void menuModificarAlumno (stAlumno* alumno)
 {
     int option;
     int status=IN;
-
     while(status)
     {
-        alumnoToString(alumno);
+        alumnoToString(*alumno);
         printf("0\tAtras\n1\tModificar legajo\n2\tModificar nombre\n3\tModificar anio\n4\tModificar edad\n");
         scanf("%i",&option);
 
@@ -419,20 +419,20 @@ stAlumno menuModificarAlumno (stAlumno alumno)
             break;
         case 1:
             printf("Ingrese nuevo legajo:\n");
-            scanf("%i",&(alumno.legajo));
+            scanf("%i",&(alumno->legajo));
             break;
         case 2:
             printf("Ingrese nuevo nombre:\n");
             fflush(stdin);
-            gets(&(alumno.nombreYapellido));
+            gets(&(alumno->nombreYapellido));
             break;
         case 3:
             printf("Ingrese nuevo anio:\n");
-            scanf("%i",&(alumno.anio));
+            scanf("%i",&(alumno->anio));
             break;
         case 4:
             printf("Ingrese nueva edad:\n");
-            scanf("%i",&(alumno.edad));
+            scanf("%i",&(alumno->edad));
             break;
         default:
             printf("La opcion ingresada no es valida\n");
@@ -445,7 +445,7 @@ void guardarEn(char nombreArchivo[],int posicion,stAlumno alumno)
     FILE* buffer=fopen(nombreArchivo,"r+b");
     if(buffer)
     {
-        fseek(buffer,posicion,SEEK_SET);
+        fseek(buffer,posicion*sizeof(stAlumno),SEEK_SET);
         fwrite(&alumno,sizeof(stAlumno),1,buffer);
         fclose(buffer);
     }
@@ -471,13 +471,32 @@ void modificarRegistro(char nombreArchivo[])
             scanf("%i",&numeroRegistro);
             if(obtenerRegistro(nombreArchivo,numeroRegistro,&alumno))//comprobacion y consumo alumno
             {
-                alumno=menuModificarAlumno(alumno);//modificacion del alumno
+                menuModificarAlumno(&alumno);//modificacion del alumno
                 guardarEn(nombreArchivo,numeroRegistro,alumno);//update
             }
             break;
         default:
             printf("Opcion incorrecta\n");
             break;
+        }
+    }
+}
+/**
+*16_Dado un archivo de alumnos, hacer una función que invierta los elementos del mismo. No
+se puede usar otro archivo auxiliar ni un arreglo auxiliar. Debe trabajar sobre el archivo.
+Puede utilizar variables de tipo alumno auxiliares.
+*/
+
+void invertirArchivo(char nombreArchivo[]){
+    int total=cantidadAlumnos(nombreArchivo);
+    stAlumno alumno1,alumno2;
+    if(total>=0)//Arroja -1 si no existe el archivo
+    {
+        for(int i=0;i<total/2;i++){
+            obtenerRegistro(nombreArchivo,i,&alumno1);
+            obtenerRegistro(nombreArchivo,total-1-i,&alumno2);
+            guardarEn(nombreArchivo,i,alumno2);
+            guardarEn(nombreArchivo,total-1-i,alumno1);
         }
     }
 }
@@ -510,8 +529,13 @@ int main()
     mostrarAlumnos(alumnosAnioUno);
 
     printf("Hay %i alumnos en total",cantidadAlumnos(alumnos));
+    */
+    /*mostrarRegistro(alumnos,3);
+    modificarRegistro(alumnos);*/
 
-    mostrarRegistro(alumnos,3);*/
-    modificarRegistro(alumnos);
+    mostrarAlumnos(alumnos);
+    invertirArchivo(alumnos);
+    printf("Alumnos invertidos\n");
+    mostrarAlumnos(alumnos);
     return 0;
 }
