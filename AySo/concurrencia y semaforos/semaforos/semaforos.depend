@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1747407702 source:c:\users\alumno\desktop\semaforos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<semaphore.h>
+
+1747409467 source:d:\mariano\ayso\concurrencia y semaforos\semaforos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<semaphore.h>
+
