@@ -3,6 +3,7 @@
 #include "pila.h"
 #define IN 1
 #define OUT 0
+/**1. Hacer una función que agregue un elemento al final de un archivo.*/
 void agregarEntero(char nombre[],int a)
 {
     FILE *buffer=fopen(nombre,"ab");
@@ -16,7 +17,7 @@ void agregarEntero(char nombre[],int a)
         printf("El archivo no se abrio correctamente\n");
     }
 }
-
+/**2. Hacer una función que muestre por pantalla el contenido de un archivo. */
 void mostrarArchivo(char nombre[])
 {
     FILE* buffer=fopen(nombre,"rb");
@@ -34,6 +35,7 @@ void mostrarArchivo(char nombre[])
         fclose(buffer);
     }
 }
+/**3. Hacer una función que retorne la cantidad de registros que contiene un archivo.*/
 int contarRegistros(char archivo[])
 {
     FILE* buffer=fopen(archivo,"rb");
@@ -127,6 +129,8 @@ void cargarAlumnos(char nombreArchivo[])
             fwrite(&alumno,sizeof(alumno),1,buffer);
         }
 
+    }else{
+        printf("El archivo ya se encuentra creado!\n");
     }
     fclose(buffer);
 }
@@ -487,12 +491,14 @@ se puede usar otro archivo auxiliar ni un arreglo auxiliar. Debe trabajar sobre 
 Puede utilizar variables de tipo alumno auxiliares.
 */
 
-void invertirArchivo(char nombreArchivo[]){
+void invertirArchivo(char nombreArchivo[])
+{
     int total=cantidadAlumnos(nombreArchivo);
     stAlumno alumno1,alumno2;
     if(total>=0)//Arroja -1 si no existe el archivo
     {
-        for(int i=0;i<total/2;i++){
+        for(int i=0; i<total/2; i++)
+        {
             obtenerRegistro(nombreArchivo,i,&alumno1);
             obtenerRegistro(nombreArchivo,total-1-i,&alumno2);
             guardarEn(nombreArchivo,i,alumno2);
@@ -500,42 +506,94 @@ void invertirArchivo(char nombreArchivo[]){
         }
     }
 }
-
-int main()
+/**
+*17_Hacer una función principal que pruebe el funcionamiento de todos los incisos anteriores, con
+*un menú de opciones para poder ejecutar todas las funciones requeridas. Tengan presente la
+*correcta declaración y el ámbito de variables
+*/
+void menu()
 {
     char archivo[]="documento";
     char alumnosAnioUno[]="alumnosPrimerAnio";
-    //menuArchivos(archivo);
     char alumnos[]="alumnos";
     stAlumno arregloAlumnos[30];
     int validosAlumnos=0;
     Pila alumnosMayores;
     inicpila(&alumnosMayores);
-    /*cargarAlumnos(alumnos);
-    mostrarAlumnos(alumnos);
-    nuevoAlumno(alumnos);
-    mostrarAlumnos(alumnos);
-    apilarMayores(&alumnosMayores,alumnos);
-    mostrar(&alumnosMayores);
+    int status=IN;
+    int option;
+    while(status)
+    {
+        printf("Ingrese el ejercicio que desea ejecutar:\n0\tSalir\n1,2,3\t archivos int"
+               "\n4-16\tArchivos alumnos\n");
+        scanf("%i",&option);
+        switch(option)
+        {
+        case 0:
+            status=OUT;
+            break;
+        case 1:
+        case 2:
+        case 3:
+            menuArchivos(archivo);
+            break;
+        case 4:
+            printf("Entre al 4\n");
+            cargarAlumnos(alumnos);
+            break;
+        case 5:
+            mostrarAlumnos(alumnos);
+            break;
+        case 6:
+            nuevoAlumno(alumnos);
+            break;
+        case 7:
+            apilarMayores(&alumnosMayores,alumnos);
+            mostrar(&alumnosMayores);
+            break;
+        case 8:
+            printf("Alumnos mayores de edad: %i\n",contarMayores(alumnos,18));
+            break;
+        case 9:
+            mostarRango(alumnos,18,30);
+            break;
+        case 10:
+            mostrarMayor(alumnos);
+            break;
+        case 11:
+            printf("Hay %i alumnos cursando el anio 1\n", alumnosEnAnio(alumnos,1));
+            break;
+        case 12:
+            filtrarPorAnio(alumnos,1,arregloAlumnos,&validosAlumnos);
+            archivarArreglo(alumnosAnioUno,arregloAlumnos,validosAlumnos);
+            mostrarAlumnos(alumnosAnioUno);
+            break;
+        case 13:
+            printf("Hay %i alumnos en total",cantidadAlumnos(alumnos));
+            break;
+        case 14:
+            mostrarRegistro(alumnos,3);
+            break;
+        case 15:
+            modificarRegistro(alumnos);
+            break;
+        case 16:
+            mostrarAlumnos(alumnos);
+            invertirArchivo(alumnos);
+            printf("Alumnos invertidos\n");
+            mostrarAlumnos(alumnos);
+            break;
+        default:
+            printf("La opcion solicitada no existe\n");
+            break;
 
-    printf("Alumnos mayores de edad: %i\n",contarMayores(alumnos,18));
-    mostarRango(alumnos,18,30);
 
-    mostrarMayor(alumnos);
-    printf("Hay %i alumnos cursando el anio 1\n", alumnosEnAnio(alumnos,1));
-    filtrarPorAnio(alumnos,1,arregloAlumnos,&validosAlumnos);
+        }
+    }
 
-    archivarArreglo(alumnosAnioUno,arregloAlumnos,validosAlumnos);
-    mostrarAlumnos(alumnosAnioUno);
-
-    printf("Hay %i alumnos en total",cantidadAlumnos(alumnos));
-    */
-    /*mostrarRegistro(alumnos,3);
-    modificarRegistro(alumnos);*/
-
-    mostrarAlumnos(alumnos);
-    invertirArchivo(alumnos);
-    printf("Alumnos invertidos\n");
-    mostrarAlumnos(alumnos);
+}
+int main()
+{
+    menu();
     return 0;
 }
