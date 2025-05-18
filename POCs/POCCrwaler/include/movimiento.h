@@ -7,6 +7,7 @@ typedef enum{
     ABAJO,
     IZQUIERDA,
     DERECHA,
+    LEVELUP,
     NINGUNA
 }Direccion;
 Direccion capturarDireccion();

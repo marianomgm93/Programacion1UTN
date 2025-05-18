@@ -12,16 +12,16 @@ Enemigo constructorEnemigo(int nivel, TipoEnemigo tipo)
     switch(tipo)
     {
     case FACIL:
-        enemigo.vida=rand()%3*nivel+VIDA_BASE;
+        enemigo.stats.vida=rand()%3*nivel+VIDA_BASE;
         break;
     case NORMAL:
-        enemigo.vida=rand()%6*nivel+VIDA_BASE;
+        enemigo.stats.vida=rand()%6*nivel+VIDA_BASE;
         break;
     case DIFICIL:
-        enemigo.vida=rand()%8*nivel+VIDA_BASE;
+        enemigo.stats.vida=rand()%8*nivel+VIDA_BASE;
         break;
     case IMPOSIBLE:
-        enemigo.vida=rand()%11*nivel+VIDA_BASE;
+        enemigo.stats.vida=rand()%11*nivel+VIDA_BASE;
         break;
     }
     return enemigo;

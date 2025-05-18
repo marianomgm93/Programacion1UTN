@@ -6,7 +6,8 @@
 typedef struct
 {
     char nombre[30];
-    int vida;
+    int experiencia;
+    //int vida;
     //Habitacion habitacionActual;
     Item items[INVENTARIO];
     Estadisticas stats;
@@ -19,6 +20,6 @@ void mostrarJugador( Jugador *jugador);
 void desequiparItem( Jugador *jugador);
 void equiparItem( Jugador *jugador, char nombreItem[]);
 void mostrarInventario( Jugador jugador);
-
+void lvlUp(Jugador* jugador);
 #endif // JUGADOR_H_INCLUDED
 

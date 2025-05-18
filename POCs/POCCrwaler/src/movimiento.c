@@ -28,6 +28,10 @@ Direccion capturarDireccion()
             aux=3;
             status=0;
             break;
+        case 'n':
+            aux=4;
+            status=0;
+            break;
         default:
             break;
 

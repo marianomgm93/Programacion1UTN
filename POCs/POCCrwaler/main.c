@@ -4,8 +4,8 @@
 #include <time.h>
 #include "movimiento.h"
 /*
-LO ULTIMO QUE HICE FUE CREAR LA CLASE ENEMIGO, SE DEBE PROSEGUIR CON EL SISTEMA DE COMBATE.
-
+*Ultimo cambio:
+*Funcionalidad agregada lvlUp en jugador.
 */
 int main()
 {
@@ -36,7 +36,11 @@ int main()
         printf("Dia Actual: %i\n",mapa.diaActual);
         // Capturar dirección del jugador
         Direccion direccion = capturarDireccion();
+        if(direccion<4){
         moverJugador(&mapa, direccion,&jugador); // Mover al jugador
+        }else if(direccion=4){
+            lvlUp(&jugador);
+        }
         // mapa.diaActual++; ahora en movimiento.c
 
 

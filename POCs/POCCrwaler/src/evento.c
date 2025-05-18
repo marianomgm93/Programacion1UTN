@@ -35,11 +35,11 @@ void seleccionarEvento(Evento evento,  Jugador* jugador)
         jugador->items[0].cantidad+=evento.datos.tesoro.cantidadOro;
         break;
     case COMBATE:
-        dmg = (jugador->stats.defensa) - (evento.datos.combate.enemigo.stats.ataque);
+       /* dmg = (jugador->stats.defensa) - (evento.datos.combate.enemigo.stats.ataque);
         if (dmg < 0)
             jugador->vida += dmg;
         else
-            printf("MISS\n");
+            printf("MISS\n");*/
             break;
     case MISION:
         break;

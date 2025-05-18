@@ -11,7 +11,6 @@ typedef enum{
 
 typedef struct{
     int nivel;
-    int vida;
     TipoEnemigo tipo;
     Estadisticas stats;
 }Enemigo;
