@@ -11,3 +11,9 @@
 	<pthread.h>
 	<semaphore.h>
 
+1747703185 source:c:\repositoriomariano\ayso\concurrencia y semaforos\semaforos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<semaphore.h>
+

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1747532139 source:c:\repositoriomariano\pocs\poccrwaler\main.c
+1747532426 source:c:\repositoriomariano\pocs\poccrwaler\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

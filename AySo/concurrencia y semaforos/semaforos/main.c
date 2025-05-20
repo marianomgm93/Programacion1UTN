@@ -42,8 +42,8 @@ int main()
     sem_init(&sem1,0,0);
     sem_init(&sem2,0,1);
     sem_init(&sem3,0,0);
-    pthread_create(&hilo2,NULL,hola2,NULL);
     pthread_create(&hilo1,NULL,hola1,NULL);
+    pthread_create(&hilo2,NULL,hola2,NULL);
     pthread_create(&hilo3,NULL,hola3,NULL);
 */
 
