@@ -5,6 +5,10 @@
 
 int main()
 {
-    id
+    char archivo[]="peliculas";
+    //menuConstruirPelicula(archivo);
+    mostrarArchivo(archivo);
+    altaOBaja(archivo,"Titanic");
+
     return 0;
 }

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1747763637 source:d:\mariano\archivosextra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pelicula.h"
+
+1747760114 d:\mariano\archivosextra\pelicula.h
+
+1747763484 source:d:\mariano\archivosextra\pelicula.c
+	<stdio.h>
+	"pelicula.h"
+	<string.h>
+
