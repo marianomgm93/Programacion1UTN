@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include "pelicula.h"
 
-
+//BUGGED
 int main()
 {
-    char archivo[]="peliculas";
-    //menuConstruirPelicula(archivo);
+    char archivo[50]="peliculas";
+   // menuConstruirPelicula(archivo);
     mostrarArchivo(archivo);
-    altaOBaja(archivo,"Titanic");
+    altaOBaja(archivo,"leo");
+    mostrarArchivo(archivo);
 
     return 0;
 }

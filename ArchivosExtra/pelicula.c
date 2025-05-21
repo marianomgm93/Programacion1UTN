@@ -37,24 +37,26 @@ void menuConstruirPelicula(char nombreArchivo[])
     int anio,valoracion,pm,idPelicula;
     Pelicula pelicula;
     idPelicula=idActual(nombreArchivo);
+    //do{
     printf("Ingrese el nombre de la pelicula\n");
     fflush(stdin);
-    gets(&nombrePeli);
+    gets(nombrePeli);
 
-    if(validarNombre(nombrePeli,nombreArchivo)==-1)
-    {
+    //}while(validarNombre(nombrePeli,nombreArchivo)!=-1);
+
+
         strcpy(pelicula.nombrePelicula,nombrePeli);
         printf("Ingrese el nombre del Director\n");
         fflush(stdin);
-        gets(&director);
+        gets(director);
 
         printf("Ingrese el Genero\n");
         fflush(stdin);
-        gets(&genero);
+        gets(genero);
 
         printf("Ingrese el Pais\n");
         fflush(stdin);
-        gets(&pais);
+        gets(pais);
 
         printf("Ingrese el anio\n");
         scanf("%i",&anio);
@@ -67,16 +69,13 @@ void menuConstruirPelicula(char nombreArchivo[])
 
         pelicula=constructorPelicula(idPelicula,nombrePeli,director,genero,pais,anio,valoracion,pm);
         archivarPelicula(nombreArchivo,pelicula);
-    }
-    else
-    {
-        printf("La pelicula ya se encuentra en el archivo");
-    }
+
+
 }
 /**
 *Retorna -1 si el nombre no existe en el archivo.
 */
-int validarNombre(char nombrePeli[],char nombreArchivo[])
+/*int validarNombre(char nombrePeli[],char nombreArchivo[])
 {
     FILE* buffer=fopen(nombreArchivo,"rb");
     Pelicula peli;
@@ -97,7 +96,7 @@ int validarNombre(char nombrePeli[],char nombreArchivo[])
     }
 
     return existe;
-}
+}*/
 
 void toString(Pelicula peli)
 {
@@ -115,7 +114,7 @@ void toString(Pelicula peli)
 void archivarPelicula(char nombreArchivo[],Pelicula pelicula)
 {
     FILE* buffer=fopen(nombreArchivo,"ab");
-    if(buffer)
+    if(buffer!=NULL)
     {
         fwrite(&pelicula,sizeof(Pelicula),1,buffer);
         fclose(buffer);
@@ -123,34 +122,34 @@ void archivarPelicula(char nombreArchivo[],Pelicula pelicula)
     else
         printf("El archivo no pudo abrirse correctamente error 334219\n");
 }
+
 void altaOBaja(char nombreArchivo[],char nombrePeli[])
 {
     FILE* buffer=fopen(nombreArchivo,"r+b");
     Pelicula peli;
-    int flag=0;
-    if(buffer)
+    if(buffer!= NULL)
     {
-        while(fread(&peli,sizeof(Pelicula),1,buffer)>0 && flag==0)
+        while(fread(&peli,sizeof(Pelicula),1,buffer)>0)
         {
-            if(strcmpi(peli.nombrePelicula,nombrePeli)==0)
+            if(strcmp(peli.nombrePelicula,nombrePeli)==0)
             {
-                peli.eliminado=(peli.eliminado>0) ? 0 : 1;
-                printf("\n%s\n",nombrePeli);
+                printf("Encontre la peli\n");
+                peli.eliminado= 1;
                 fseek(buffer,(-1)*sizeof(Pelicula),SEEK_CUR);
                 fwrite(&peli,sizeof(Pelicula),1,buffer);
-                flag=1;
-//                toString(peli);
             }
+                            printf("No Encontre la peli\n");
+
         }
         fclose(buffer);
-    }
-    mostrarArchivo(nombreArchivo);
+    }else
+        printf("El archivo no pudo abrirse correctamente error 334219\n");
 }
 void mostrarArchivo(char nombreArchivo[])
 {
     FILE* buffer=fopen(nombreArchivo,"rb");
     Pelicula peli;
-    if(buffer)
+    if(buffer!=NULL)
     {
         while(fread(&peli,sizeof(Pelicula),1,buffer)>0)
         {
@@ -160,5 +159,6 @@ void mostrarArchivo(char nombreArchivo[])
             //}
         }
         fclose(buffer);
-    }
+    }else
+        printf("El archivo no pudo abrirse correctamente error 334219\n");
 }
