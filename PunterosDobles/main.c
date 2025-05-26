@@ -59,43 +59,83 @@ int cantidadAlumnos(char nombreArchivo[])
 
 //////////////////
 
-void * crearArregloPares2(int arrOrigen[],int validos,int* pares, int** arrPares){
+void crearArregloPares2(int arrOrigen[],int validos,int* pares, int** arrPares)
+{
     *pares=contarPares(arrOrigen,validos);
     *arrPares=malloc((*pares)*sizeof(int));
     pasarArreglo(*arrPares, arrOrigen, pares, validos);
 
 }
-int * crearArregloPares(int arrOrigen[],int validos,int* pares){
+int * crearArregloPares(int arrOrigen[],int validos,int* pares)
+{
     *pares=contarPares(arrOrigen,validos);
     int * arrPares=malloc((*pares)*sizeof(int));
     pasarArreglo(arrPares, arrOrigen, pares, validos);
     return arrPares;
 }
-void mostrarArreglo(int arr[],int validos){
+void mostrarArreglo(int arr[],int validos)
+{
     printf("Arreglo:{");
-    for(int i=0;i<validos;i++){
+    for(int i=0; i<validos; i++)
+    {
         printf(" %i", arr[i]);
     }
     printf(" }\n");
 }
-void pasarArreglo(int arrDestino[], int arrOrigen[], int validosDestino, int validosOrigen){
+void pasarArreglo(int arrDestino[], int arrOrigen[], int validosDestino, int validosOrigen)
+{
     int contador=0,aux;
-    for (int i=0;i<validosOrigen && contador<validosDestino;i++){
+    for (int i=0; i<validosOrigen && contador<validosDestino; i++)
+    {
         aux=arrOrigen[i];
-        if(aux%2==0){
+        if(aux%2==0)
+        {
             arrDestino[contador]=aux;
             contador++;
         }
     }
 }
-int contarPares(int arr[],int validos){
+int contarPares(int arr[],int validos)
+{
     int pares=0;
-    for (int i=0;i<validos;i++){
-        if(arr[i]%2==0){
+    for (int i=0; i<validos; i++)
+    {
+        if(arr[i]%2==0)
+        {
             pares++;
         }
     }
     return pares;
+}
+void mostrarAlumnosDesdeArreglo(stAlumno alumnos[],int validos)
+{
+    for(int i=0; i<validos; i++)
+    {
+        alumnoToString(alumnos[i]);
+    }
+}
+void copiarDesde(stAlumno** alumnos, char nombreArchivo[])
+{
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    int i=0;
+    if(buffer)
+    {
+        while(fread(&alumno,sizeof(stAlumno),1,buffer)>0)
+        {
+           // alumnoToString(alumno);
+            (*alumnos)[i]=alumno;
+           //alumnoToString(alumno);
+            i++;
+
+        }
+        fclose(buffer);
+    }
+    else
+    {
+        printf("no se encontro el archivo\n");
+    }
+
 }
 int main()
 {
@@ -147,6 +187,13 @@ int main()
     mostrarArreglo(arrPares,validosPares);
     */
 
+    //3A
+    char archivo[]="alumnos";
+    int validos=cantidadAlumnos(archivo);
+    printf("%i",validos);
+    stAlumno* alumnos=malloc(sizeof(stAlumno)*validos);
+    copiarDesde(&alumnos,archivo);
+    mostrarAlumnosDesdeArreglo(alumnos,validos);
 
     return 0;
 }
