@@ -137,6 +137,63 @@ void copiarDesde(stAlumno** alumnos, char nombreArchivo[])
     }
 
 }
+stAlumno* copiarDesdeMallocAdentro( char nombreArchivo[],int* validos)
+{
+    (*validos)=cantidadAlumnos(nombreArchivo);
+    stAlumno* alumnos=malloc(sizeof(stAlumno)*(*validos));
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    int i=0;
+    if(buffer)
+    {
+        while(fread(&alumno,sizeof(stAlumno),1,buffer)>0)
+        {
+           // alumnoToString(alumno);
+            alumnos[i]=alumno;
+           //alumnoToString(alumno);
+            i++;
+
+        }
+        fclose(buffer);
+    }
+    else
+    {
+        printf("no se encontro el archivo\n");
+    }
+    return alumnos;
+}
+void copiarDesdeMallocAdentro2(stAlumno** alumnos,char nombreArchivo[],int* validos)
+{
+    (*validos)=cantidadAlumnos(nombreArchivo);
+    (*alumnos)=malloc(sizeof(stAlumno)*(*validos));
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    stAlumno alumno;
+    int i=0;
+    if(buffer)
+    {
+        while(fread(&alumno,sizeof(stAlumno),1,buffer)>0)
+        {
+           // alumnoToString(alumno);
+            (*alumnos)[i]=alumno;
+           //alumnoToString(alumno);
+            i++;
+
+        }
+        fclose(buffer);
+    }
+    else
+    {
+        printf("no se encontro el archivo\n");
+    }
+}
+
+int* redimensionarArreglo(int* arr,int validos,int newDim){
+
+    if(validos<newDim){
+        arr=realloc(arr,newDim);
+    }
+    return arr;
+}
 int main()
 {
 
@@ -188,12 +245,39 @@ int main()
     */
 
     //3A
+    /**
     char archivo[]="alumnos";
     int validos=cantidadAlumnos(archivo);
     printf("%i",validos);
     stAlumno* alumnos=malloc(sizeof(stAlumno)*validos);
     copiarDesde(&alumnos,archivo);
     mostrarAlumnosDesdeArreglo(alumnos,validos);
+    */
+    ///3B
 
+    char archivo[]="alumnos";
+    /**
+    int validos;
+    stAlumno* alumnos=copiarDesdeMallocAdentro(archivo,&validos);
+    mostrarAlumnosDesdeArreglo(alumnos,validos);
+    */
+    //3C
+    /**
+    int validos;
+    stAlumno* alumnos;
+    copiarDesdeMallocAdentro2(&alumnos,archivo,&validos);
+    mostrarAlumnosDesdeArreglo(alumnos,validos);
+    */
+    //4
+    int validos=2;
+    int * arr=malloc(sizeof(int)*validos);
+    arr[0]=1;
+    arr[1]=2;
+    redimensionarArreglo(arr,validos,4);
+    arr[2]=3;
+    validos++;
+    arr[3]=4;
+    validos++;
+    mostrarArreglo(arr,validos);
     return 0;
 }
