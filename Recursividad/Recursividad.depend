@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1748453885 source:d:\mariano\recursividad\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
