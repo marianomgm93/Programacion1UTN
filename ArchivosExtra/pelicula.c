@@ -13,6 +13,7 @@ int idActual(char nombreArchivo[])
     }
     return id;
 }
+/////////////////Crud/////////////
 Pelicula constructorPelicula(int idPelicula,char nombrePelicula[],char director[],char genero[],char pais[],int anio,int valoriacion, int pm)
 {
 
@@ -37,45 +38,47 @@ void menuConstruirPelicula(char nombreArchivo[])
     int anio,valoracion,pm,idPelicula;
     Pelicula pelicula;
     idPelicula=idActual(nombreArchivo);
-    //do{
-    printf("Ingrese el nombre de la pelicula\n");
+    do
+    {
+        printf("Ingrese el nombre de la pelicula\n");
+        fflush(stdin);
+        gets(nombrePeli);
+
+    }
+    while(validarNombre(nombrePeli,nombreArchivo)!=-1);
+
+
+    strcpy(pelicula.nombrePelicula,nombrePeli);
+    printf("Ingrese el nombre del Director\n");
     fflush(stdin);
-    gets(nombrePeli);
+    gets(director);
 
-    //}while(validarNombre(nombrePeli,nombreArchivo)!=-1);
+    printf("Ingrese el Genero\n");
+    fflush(stdin);
+    gets(genero);
 
+    printf("Ingrese el Pais\n");
+    fflush(stdin);
+    gets(pais);
 
-        strcpy(pelicula.nombrePelicula,nombrePeli);
-        printf("Ingrese el nombre del Director\n");
-        fflush(stdin);
-        gets(director);
+    printf("Ingrese el anio\n");
+    scanf("%i",&anio);
 
-        printf("Ingrese el Genero\n");
-        fflush(stdin);
-        gets(genero);
+    printf("Ingrese la valoracion\n");
+    scanf("%i",&valoracion);
 
-        printf("Ingrese el Pais\n");
-        fflush(stdin);
-        gets(pais);
+    printf("Ingrese el PM  (0- si es ATP / 13: mayor de trece /  16: mayor de 16 / 18: mayor de 18)\n");
+    scanf("%i",&pm);
 
-        printf("Ingrese el anio\n");
-        scanf("%i",&anio);
-
-        printf("Ingrese la valoracion\n");
-        scanf("%i",&valoracion);
-
-        printf("Ingrese el PM  (0- si es ATP / 13: mayor de trece /  16: mayor de 16 / 18: mayor de 18)\n");
-        scanf("%i",&pm);
-
-        pelicula=constructorPelicula(idPelicula,nombrePeli,director,genero,pais,anio,valoracion,pm);
-        archivarPelicula(nombreArchivo,pelicula);
+    pelicula=constructorPelicula(idPelicula,nombrePeli,director,genero,pais,anio,valoracion,pm);
+    archivarPelicula(nombreArchivo,pelicula);
 
 
 }
 /**
 *Retorna -1 si el nombre no existe en el archivo.
 */
-/*int validarNombre(char nombrePeli[],char nombreArchivo[])
+int validarNombre(char nombrePeli[],char nombreArchivo[])
 {
     FILE* buffer=fopen(nombreArchivo,"rb");
     Pelicula peli;
@@ -91,13 +94,27 @@ void menuConstruirPelicula(char nombreArchivo[])
         }
 
         fclose(buffer);
-    }else{
-    printf("No existe archivo\n");
+    }
+    else
+    {
+        printf("No existe archivo\n");
     }
 
     return existe;
-}*/
+}
 
+void archivarPelicula(char nombreArchivo[],Pelicula pelicula)
+{
+    FILE* buffer=fopen(nombreArchivo,"ab");
+    if(buffer!=NULL)
+    {
+        fwrite(&pelicula,sizeof(Pelicula),1,buffer);
+        fclose(buffer);
+    }
+    else
+        printf("El archivo no pudo abrirse correctamente error 334219\n");
+}
+///////////////////cRud///////////////
 void toString(Pelicula peli)
 {
     printf("...................................\n");
@@ -111,17 +128,29 @@ void toString(Pelicula peli)
     printf("Eliminado: %i\n",peli.eliminado);
     printf("...................................\n");
 }
-void archivarPelicula(char nombreArchivo[],Pelicula pelicula)
+
+void mostrarArchivo(char nombreArchivo[])
 {
-    FILE* buffer=fopen(nombreArchivo,"ab");
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    Pelicula peli;
     if(buffer!=NULL)
     {
-        fwrite(&pelicula,sizeof(Pelicula),1,buffer);
+        while(fread(&peli,sizeof(Pelicula),1,buffer)>0)
+        {
+            //if(peli.eliminado==0)
+            //{
+            toString(peli);
+            //}
+        }
         fclose(buffer);
     }
     else
         printf("El archivo no pudo abrirse correctamente error 334219\n");
 }
+
+//////////////////crUd/////////////////////
+
+
 
 void altaOBaja(char nombreArchivo[],char nombrePeli[])
 {
@@ -138,27 +167,11 @@ void altaOBaja(char nombreArchivo[],char nombrePeli[])
                 fseek(buffer,(-1)*sizeof(Pelicula),SEEK_CUR);
                 fwrite(&peli,sizeof(Pelicula),1,buffer);
             }
-                            printf("No Encontre la peli\n");
+            printf("No Encontre la peli\n");
 
         }
         fclose(buffer);
-    }else
-        printf("El archivo no pudo abrirse correctamente error 334219\n");
-}
-void mostrarArchivo(char nombreArchivo[])
-{
-    FILE* buffer=fopen(nombreArchivo,"rb");
-    Pelicula peli;
-    if(buffer!=NULL)
-    {
-        while(fread(&peli,sizeof(Pelicula),1,buffer)>0)
-        {
-            //if(peli.eliminado==0)
-            //{
-                toString(peli);
-            //}
-        }
-        fclose(buffer);
-    }else
+    }
+    else
         printf("El archivo no pudo abrirse correctamente error 334219\n");
 }

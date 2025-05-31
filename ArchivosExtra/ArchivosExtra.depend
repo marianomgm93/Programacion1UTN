@@ -11,3 +11,15 @@
 	"pelicula.h"
 	<string.h>
 
+1748650688 source:c:\repositoriomariano\archivosextra\main.c
+	<stdio.h>
+	<stdlib.h>
+	"pelicula.h"
+
+1748633525 c:\repositoriomariano\archivosextra\pelicula.h
+
+1748633525 source:c:\repositoriomariano\archivosextra\pelicula.c
+	<stdio.h>
+	"pelicula.h"
+	<string.h>
+

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <conio.h>
 //1
 /**
 1. Calcular el factorial de un número en forma recursiva.
@@ -139,34 +140,96 @@ int menorArchivo(FILE *buffer)
 forma recursiva. (si no te sale, primero proba con invertir
 los elementos de un arreglo de int)
 */
-int invertirArchivo(FILE * buffer){
+int invertirArchivo(FILE * buffer,int posicion){
     int num1,num2;
-    if()
+    int tell1,tell2;
+        fseek(buffer,sizeof(int)*posicion,SEEK_SET);
+        tell1=ftell(buffer);
+        fread(&num1,sizeof(int),1,buffer);        fseek(buffer,sizeof(int)*(-1)*(posicion+1),SEEK_END);
+        tell2=ftell(buffer);
+        fread(&num2,sizeof(int),1,buffer);
+
+    if(tell1!=tell2){
+        fseek(buffer,sizeof(int)*posicion,SEEK_SET);
+        fwrite(&num2,sizeof(int),1,buffer);
+        fseek(buffer,sizeof(int)*(-1)*(posicion+1),SEEK_END);
+        fwrite(&num1,sizeof(int),1,buffer);
+        invertirArchivo(buffer,posicion+1);
+    }
 
 }
+/**
+10. Recorrer un archivo y mostrar sus elementos en forma invertida de forma recursiva.
+*/
+int mostrarArchivoInvertido(FILE* buffer){
+    int num;
+    if(fread(&num,sizeof(int),1,buffer)>0){
+        mostrarArchivoInvertido(buffer);
+        printf("%i\n",num);
+    }
+
+}
+/**
+11. Ingresar valores a una variable de tipo char (por teclado) y mostrarlo en el orden
+inverso (hasta ingresar un ‘*’) de forma recursiva. NO usar arreglos.
+*/
+void ingresarPorTeclado(){
+
+    char letra;
+    printf("Ingrese un caracter\n");
+    letra=getch();
+    if(letra!='*'){
+        ingresarPorTeclado();
+        printf("%c ",letra);
+    }
+}
+/**
+12. Determinar si un arreglo contiene un determinado elemento de forma recursiva.
+(Pueden intentarlo también con una función void)(Tener en cuenta para un arreglo
+desordenado y el caso para un arreglo ordenado)
+*/
+
+int buscarElemento(int arr[],int elemento, int validos){
+    int resultado=0;
+    validos--;
+    if(validos>=0){
+    resultado=(arr[validos]==elemento) ? 1 : buscarElemento(arr,elemento,validos);
+    }
+    return resultado;
+}
+
+
 int main()
 {
     srand(time(NULL));
+
     ///1
     printf("5! = %d\n",factorial(5));
+
     ///2
     printf("5^5 = %d\n",pot(5,5));
+
     ///3
     int arr1[]= {1,2,3,4,5};
     int validos=5;
     int i=0;
     recorrerArregloRecursivo(arr1,validos,i);
     printf("\n");
+
     ///4
     recorrerArregloRecursivoInverso(arr1,validos,i);
     printf("\n");
+
     ///5
     int arrCapicua[]= {1,2,3,2,1};
     (esCapicua(arrCapicua,5,0)) ? printf("Es Capicua :)\n") : printf("No es capicua :(\n");
+
     ///6
     printf("La suma total del arreglo es: %i\n",sumarArrRecursiva(arr1,validos,0));
+
     ///7
     printf("El menor del arreglo es : %i\n",buscaMenorRecursiva(arr1,validos,0,0));
+
     ///8
     int random;
     FILE * buffer=fopen("numeros","wb");
@@ -181,8 +244,23 @@ int main()
     buffer=fopen("numeros","rb");
     printf("El menor del arreglo es : %i\n",menorArchivo(buffer));
     fclose(buffer);
-    ///9
 
+    ///9
+    buffer=fopen("numeros","r+b");
+    invertirArchivo(buffer,0);
+    fclose(buffer);
+    mostrarArchivo("numeros");
+
+    ///10
+    buffer=fopen("numeros","rb");
+    mostrarArchivoInvertido(buffer);
+    fclose(buffer);
+
+    ///11
+    //ingresarPorTeclado();
+
+    ///12
+    printf("El numero 3 se encuentra en el arreglo? %i\n",buscarElemento(arrCapicua,5,validos));
 
     return 0;
 }
