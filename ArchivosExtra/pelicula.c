@@ -147,31 +147,57 @@ void mostrarArchivo(char nombreArchivo[])
     else
         printf("El archivo no pudo abrirse correctamente error 334219\n");
 }
+Pelicula BuscarPorNombre(char nombreArchivo[],char nombrePeli[])
+{
+    FILE* buffer=fopen(nombreArchivo,"rb");
+    Pelicula peli;
+    if(buffer)
+    {
+        while(fread(&peli,sizeof(Pelicula),1,buffer)>0 && strcmp(peli.nombrePelicula,nombrePeli)!=0);
 
+        fclose(buffer);
+    }
+    else
+    {
+        printf("El archivo no pudo abrirse correctamente error 334219\n");
+    }
+
+    return peli;
+}
 //////////////////crUd/////////////////////
-
-
-
-void altaOBaja(char nombreArchivo[],char nombrePeli[])
+void modificar(char nombreArchivo[],Pelicula peli)
 {
     FILE* buffer=fopen(nombreArchivo,"r+b");
-    Pelicula peli;
-    if(buffer!= NULL)
+    Pelicula peliAnterior;
+    int flag=0;
+    if(buffer)
     {
-        while(fread(&peli,sizeof(Pelicula),1,buffer)>0)
+        printf("Llegue");
+        while(fread(&peliAnterior,sizeof(Pelicula),1,buffer)>0 && !flag)
         {
-            if(strcmp(peli.nombrePelicula,nombrePeli)==0)
+            if(peliAnterior.idPelicula==peli.idPelicula)
             {
-                printf("Encontre la peli\n");
-                peli.eliminado= 1;
-                fseek(buffer,(-1)*sizeof(Pelicula),SEEK_CUR);
+                fseek(buffer,-1*sizeof(Pelicula),SEEK_CUR);
                 fwrite(&peli,sizeof(Pelicula),1,buffer);
+                flag=1;
             }
-            printf("No Encontre la peli\n");
 
         }
         fclose(buffer);
     }
     else
-        printf("El archivo no pudo abrirse correctamente error 334219\n");
+        printf("No se encontro el archivo\n");
+
+}
+
+
+void altaOBaja(char nombreArchivo[],char nombrePeli[])
+{
+    Pelicula peli;
+    if(validarNombre(nombrePeli, nombreArchivo)!=-1)
+    {
+        peli=BuscarPorNombre(nombreArchivo,nombrePeli);
+        peli.eliminado=(peli.eliminado) ? 0 : 1;
+        modificar(nombreArchivo,peli);
+    }
 }

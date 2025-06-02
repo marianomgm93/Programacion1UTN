@@ -23,6 +23,7 @@ void toString(Pelicula peli);
 void archivarPelicula(char nombreArchivo[],Pelicula pelicula);
 void altaOBaja(char nombreArchivo[],char nombrePeli[]);
 void mostrarArchivo(char nombreArchivo[]);
+Pelicula BuscarPorNombre(char nombreArchivo[],char nombrePeli[]);
 
 
 
