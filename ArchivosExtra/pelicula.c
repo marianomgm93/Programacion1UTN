@@ -172,11 +172,11 @@ void modificar(char nombreArchivo[],Pelicula peli)
     int flag=0;
     if(buffer)
     {
-        printf("Llegue");
         while(fread(&peliAnterior,sizeof(Pelicula),1,buffer)>0 && !flag)
         {
             if(peliAnterior.idPelicula==peli.idPelicula)
             {
+                toString(peliAnterior);
                 fseek(buffer,-1*sizeof(Pelicula),SEEK_CUR);
                 fwrite(&peli,sizeof(Pelicula),1,buffer);
                 flag=1;

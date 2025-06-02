@@ -11,8 +11,10 @@ int main()
 
     Pelicula peli=BuscarPorNombre(archivo,"Titanic");
     toString(peli);
-
-    altaOBaja(archivo,"Titanic");
+    mostrarArchivo(archivo);
+    peli.anio=1993;
+    modificar(archivo,peli);
+    //altaOBaja(archivo,"Titanic");
     mostrarArchivo(archivo);
 
     return 0;
