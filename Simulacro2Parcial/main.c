@@ -81,7 +81,8 @@ void cargarArregloPlanetas(Planeta arr[], int* validos)
         printf("Desea cargar un nuevo planeta?\n1\tCargar Nuevo Planeta\n0\tSalir\n");
         scanf("%d",&option);
 
-    }while(option);
+    }
+    while(option);
 
 }
 Galaxia crearGalaxia()
@@ -103,8 +104,22 @@ Galaxia crearGalaxia()
     cargarArregloPlanetas(listaPlanetas,&valPlanetas);
     return constructorGalaxia(nombreGalaxia,tipoGalaxia,descubiertoPor,listaPlanetas,valPlanetas);
 }
+void cargarArregloGalaxias(Galaxia arr[], int* validos)
+{
+    int option;
+    do
+    {
+        arr[*validos]=crearGalaxia();
+        (*validos)++;
+        printf("Desea cargar otra galaxia?\n1\tCargar otra galaxia\n0\tSalir\n");
+        scanf("%i",&option);
+    }
+    while(option);
+
+}
 ///2_Mostrar//////////////////////
-void planetaToString(Planeta pla){
+void planetaToString(Planeta pla)
+{
     puts("///////////////PLANETA//////////////////");
     printf("%s\n",pla.nombrePlaneta);
     printf("Estrella: %s\n",pla.estrella);
@@ -115,13 +130,15 @@ void planetaToString(Planeta pla){
     puts("///////////////////////////////////////");
 
 }
-void toString(Galaxia gal){
+void toString(Galaxia gal)
+{
     puts("///////////////GALAXIA//////////////////");
     printf("Galaxia: %s\n",gal.nombreGalaxia);
     printf("Tipo: %s\n",gal.tipoGalaxia);
     printf("Descubierto por: %s\n",gal.descubiertoPor);
     printf("Planetas:\n");
-    for(int i=0;i<gal.valPlanetas;i++){
+    for(int i=0; i<gal.valPlanetas; i++)
+    {
         planetaToString(gal.listaPlanetas[i]);
     }
     puts("///////////////////////////////////////");
@@ -129,11 +146,122 @@ void toString(Galaxia gal){
 
 
 }
+void mostrarArrGalaxias(Galaxia arr[],int validos)
+{
+    for(int i=0; i<validos; i++)
+    {
+        toString(arr[i]);
+    }
+
+}
+void mostrarArrGalaxiasConTipo(Galaxia arr[],int validos,char tipoGalaxia[])
+{
+    for(int i=0; i<validos; i++)
+    {
+        if(strcmpi(arr[i].tipoGalaxia,tipoGalaxia)==0)
+        {
+            toString(arr[i]);
+        }
+    }
+
+}
+///3. contar satelites////////////////
+int contarSatelitesPlaneta(Planeta arr[],int validos)
+{
+    return(validos-1>=0) ? arr[validos-1].cantidadSatelites+contarSatelitesPlaneta(arr,validos-1) : 0;
+}
+
+int contarSatelitesGalaxia(Galaxia arr[],int validos)
+{
+    int totalSat=0;
+    for (int i=0; i<validos; i++)
+    {
+        totalSat+=contarSatelitesPlaneta(arr[i].listaPlanetas,arr[i].valPlanetas);
+    }
+    return totalSat;
+}
+///4. Archivo///////////////////////
+void persistirArr(Galaxia arr[], int validos, char nombreArchivo[])
+{
+    FILE* buffer= fopen(nombreArchivo,"ab");
+    int i=0;
+    Galaxia gal;
+    if(buffer)
+    {
+        while(i<validos)
+        {
+            gal=arr[i];
+            fwrite(&gal,sizeof(Galaxia),1,buffer);
+            i++;
+        }
+        fclose(buffer);
+    }
+    else
+        printf("no fue posible ingresar al archivo %s\n",nombreArchivo);
+}
+void persistirArr(Planeta arr[], int validos, char nombreArchivo[], float masa)
+{
+    FILE* buffer= fopen(nombreArchivo,"ab");
+    int i=0;
+    Planeta pla;
+    if(buffer)
+    {
+        while(i<validos)
+        {
+            pla=arr[i];
+            if(pla.masa>masa)
+            {
+                fwrite(&pla,sizeof(Planeta),1,buffer);
+            }
+            i++;
+        }
+        fclose(buffer);
+    }
+    else
+        printf("no fue posible ingresar al archivo %s\n",nombreArchivo);
+}
+
+///5///////////////
+void levantarGalaxias(char archivo[],Galaxia** arr, int* validos)
+{
+    FILE* buffer = fopen(archivo,"rb");
+    int i=0;
+    Galaxia gal;
+    if(buffer)
+    {
+        fseek(buffer,0,SEEK_END);
+        (*validos)=ftell(buffer)/sizeof(Galaxia);
+        (*arr)=malloc(sizeof(Galaxia)*(*validos));
+        rewind(buffer);
+        while(fread(&gal,sizeof(Galaxia),1,buffer)>0 && i<(*validos))
+        {
+            (*arr)[i]=gal;
+
+            i++;
+        }
+        fclose(buffer);
+    }
+}
 int main()
 {
-    Galaxia gal;
-    printf("1\tNueva Galaxia\n");
-    gal=crearGalaxia();
-    toString(gal);
+    char archivo[]="galaxias";
+    char planetas[]="planetas";
+    Galaxia arrGalaxias[20];
+    int validosGalaxias;
+    ///1
+    //cargarArregloGalaxias(arrGalaxias,&validosGalaxias);
+    //mostrarArrGalaxias(arrGalaxias,validosGalaxias);
+    ///2
+    //mostrarArrGalaxiasConTipo(arrGalaxias,validosGalaxias,"espiral");
+    ///3
+    ///4
+    //persistirArr(arrGalaxias,validosGalaxias,archivo);
+    ///5
+    Galaxia * arrGalaxiasPersistidas;
+    int validos2;
+    levantarGalaxias(archivo,&arrGalaxiasPersistidas,&validos2);
+    mostrarArrGalaxias(arrGalaxiasPersistidas,validos2);
+    printf("%d\n",contarSatelitesPlaneta(arrGalaxiasPersistidas[0].listaPlanetas,arrGalaxiasPersistidas[0].valPlanetas));
+    printf("La Cantidad de satelites del arreglo de galaxias es: %i\n",contarSatelitesGalaxia(arrGalaxiasPersistidas,validos2));
     return 0;
 }
