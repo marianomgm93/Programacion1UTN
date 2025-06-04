@@ -154,6 +154,14 @@ void mostrarArrGalaxias(Galaxia arr[],int validos)
     }
 
 }
+void mostrarArrPlanetas(Planeta arr[],int validos)
+{
+    for(int i=0; i<validos; i++)
+    {
+        planetaToString(arr[i]);
+    }
+
+}
 void mostrarArrGalaxiasConTipo(Galaxia arr[],int validos,char tipoGalaxia[])
 {
     for(int i=0; i<validos; i++)
@@ -199,7 +207,7 @@ void persistirArr(Galaxia arr[], int validos, char nombreArchivo[])
     else
         printf("no fue posible ingresar al archivo %s\n",nombreArchivo);
 }
-void persistirArr(Planeta arr[], int validos, char nombreArchivo[], float masa)
+void persistirArrPlanetas(Planeta arr[], int validos, char nombreArchivo[], float masa)
 {
     FILE* buffer= fopen(nombreArchivo,"ab");
     int i=0;
@@ -242,6 +250,25 @@ void levantarGalaxias(char archivo[],Galaxia** arr, int* validos)
         fclose(buffer);
     }
 }
+void levantarPlanetas(char archivo[],Planeta** arr, int* validos)
+{
+    FILE* buffer = fopen(archivo,"rb");
+    int i=0;
+    Planeta pla;
+    if(buffer)
+    {
+        fseek(buffer,0,SEEK_END);
+        (*validos)=ftell(buffer)/sizeof(Planeta);
+        (*arr)=malloc(sizeof(Planeta)*(*validos));
+        rewind(buffer);
+        while(fread(&pla,sizeof(Planeta),1,buffer)>0 && i<(*validos))
+        {
+            (*arr)[i]=pla;
+            i++;
+        }
+        fclose(buffer);
+    }
+}
 int main()
 {
     char archivo[]="galaxias";
@@ -257,11 +284,21 @@ int main()
     ///4
     //persistirArr(arrGalaxias,validosGalaxias,archivo);
     ///5
+
     Galaxia * arrGalaxiasPersistidas;
     int validos2;
     levantarGalaxias(archivo,&arrGalaxiasPersistidas,&validos2);
     mostrarArrGalaxias(arrGalaxiasPersistidas,validos2);
     printf("%d\n",contarSatelitesPlaneta(arrGalaxiasPersistidas[0].listaPlanetas,arrGalaxiasPersistidas[0].valPlanetas));
     printf("La Cantidad de satelites del arreglo de galaxias es: %i\n",contarSatelitesGalaxia(arrGalaxiasPersistidas,validos2));
+    ///5///////////////////
+    puts("PLANETAAAAAS");
+
+    Planeta * arrPlanetasPer;
+    int validos3;
+    persistirArrPlanetas(arrGalaxiasPersistidas[0].listaPlanetas,arrGalaxiasPersistidas[0].valPlanetas,"planetasGrandes",0.1);
+    levantarPlanetas("planetasGrandes",&arrPlanetasPer,&validos3);
+    mostrarArrPlanetas(arrPlanetasPer,validos3);
+
     return 0;
 }

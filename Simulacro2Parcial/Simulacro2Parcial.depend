@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1748986911 source:e:\utn\simulacro2parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
