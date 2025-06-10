@@ -49,47 +49,47 @@
 	<stdlib.h>
 	"movimiento.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\main.c
+1749572313 source:d:\mariano\pocs\poccrwaler\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<time.h>
 	"movimiento.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\mapa.h
+1749572313 d:\mariano\pocs\poccrwaler\include\mapa.h
 	"habitacion.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\jugador.h
+1749572313 d:\mariano\pocs\poccrwaler\include\jugador.h
 	"estadisticas.h"
 	"item.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\item.h
+1749572313 d:\mariano\pocs\poccrwaler\include\item.h
 
-1747670969 d:\mariano\pocs\poccrwaler\include\estadisticas.h
+1749572312 d:\mariano\pocs\poccrwaler\include\estadisticas.h
 
-1747670969 d:\mariano\pocs\poccrwaler\include\movimiento.h
+1749572313 d:\mariano\pocs\poccrwaler\include\movimiento.h
 	"mapa.h"
 	"conio.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\estadisticas.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\estadisticas.c
 	<stdio.h>
 	"estadisticas.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\item.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\item.c
 	<stdio.h>
 	<string.h>
 	"item.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\mapa.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\mapa.c
 	<stdio.h>
 	"mapa.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\movimiento.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\movimiento.c
 	<stdio.h>
 	<stdlib.h>
 	"movimiento.h"
 
-1747671919 source:d:\mariano\pocs\poccrwaler\src\jugador.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\jugador.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -197,28 +197,29 @@
 	<stdio.h>
 	"enemigo.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\habitacion.h
+1749572313 d:\mariano\pocs\poccrwaler\include\habitacion.h
 	"evento.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\evento.h
+1749574934 d:\mariano\pocs\poccrwaler\include\evento.h
 	"enemigo.h"
 	"jugador.h"
 
-1747670969 d:\mariano\pocs\poccrwaler\include\enemigo.h
+1749572312 d:\mariano\pocs\poccrwaler\include\enemigo.h
 	<string.h>
 	"estadisticas.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\evento.c
+1749576312 source:d:\mariano\pocs\poccrwaler\src\evento.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"evento.h"
+	<conio.h>
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\habitacion.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\habitacion.c
 	<stdio.h>
 	"habitacion.h"
 
-1747670969 source:d:\mariano\pocs\poccrwaler\src\enemigo.c
+1749572313 source:d:\mariano\pocs\poccrwaler\src\enemigo.c
 	<stdlib.h>
 	<stdio.h>
 	"enemigo.h"

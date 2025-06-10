@@ -48,4 +48,6 @@ typedef struct
 
 void inicializarEvento(Evento* evento,int nivel);
 void seleccionarEvento(Evento evento,  Jugador *jugador);
+int combate(Jugador *jugador, Enemigo* enemigo);
+int calcular_iniciativa_combate(Estadisticas jugador, Estadisticas monstruo);
 #endif // EVENTO_H_INCLUDED
